@@ -1,0 +1,14 @@
+lECCION 3
+
++documentacion, piramide SGSI/ISO27001
+    + -> Politica de Seguridad de Informacion
+   +++ -> Manual / Guia de aspectos importnates sobre seguridad de la info (generales)
+  +++++ -> Procedimientos (Procesos del quehacer de la empresa) //Como brindar permisos a un usuario de TI
++++++++++ -> Instrucciones de trabajo, registros (electronicos, fisicos)
+
+Para ISO9001 es muy similar, ej: Politica de calidad en vez de politica de seguridad
+
+*****************************************************************
+
+
+
