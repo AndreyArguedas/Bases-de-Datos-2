@@ -1,0 +1,56 @@
+SGSI -> ISMS (EN INGLES)
+
+Seguridad informatica: Proteccion de las infraestructuras
+
+Seguridad informacion: Seguridad de info y datos (ejemplo correso, contratos, bases de datos)
+
+Es necesario considerar el ciclo de vida de la info
+lo que es critico hoy puede no serlo luego.
+
+Con un SGSI podemos ayudarnos a garantizar la seguridad
+mediante un ordenamiento de las estructuras de informacion 
+, segundo creando procedimientos de trabajo para mantener la info
+segura, por ultimo tener como medir la eficacia de lo que hemos puesto en practica
+
+Confidencialidad: Solo quienes tienen acceso a la info deben verla
+
+Integridad : Mantenimiento de la exactitud y completitud de la info y sus metodos de proceso
+
+Disponibilidad: Acceso a la info por medio de quienes estan autorizados
+
+CID
+
+*******************************************************************************************************
+
+Riesgos fisicos: Incendios, inundaciones, vandalismo
+
+Riesgos logicos: Relacionados con tecnologia, hackers, virus, robo de info
+
+UNE-ISO/IEC 27001 norma que permite establecer politicas prodecimientos y controles para disminuir riesgos.
+
+La implementacion necesita la union de toda la empresa
+
+La gerencia debe liderar el proceso ya que conoce todos los riesgos
+
+BENEFICIOS:
+    REDUCCION DE RIESGOS
+    AHORRO DE COSTOS
+    LA SEGURIDAD SE CONVIERTE EN UN CICLO DE VIDA EN EL QUE PARTICIPA TODA LA ORG
+    SE ELIMINA COSTOS INECESARIOS Y SE HACE MAS FUERTE EN EL AMBITO LEGAL
+    AUMENTA COMPETITIVIDAD (PRESTIGIO)
+
+
+***********************************************************************************************************
+
+Ley Organica 15/99 de Proteccion de Datos de Caracter Personal (LOPD)
+    Los datos personales no pueden ser cedidos a terceros sin consentimiento
+
+Ley Organica 34/2002 Servicios de la Sociedad de la Informacion y de Comercio Electronico
+    Regular el financiamiento de prestadores de servicios de empresas que dan servicios digitales
+
+Grupos de delitos informaticos:
+
+1 - Tratamiento ilegal de datos personales
+2 - Delitos relativos (porno ilegal)
+3 - Acceso autorizado (suplantacion de identidades)
+4 - Propieda intelectual (pirateria)
