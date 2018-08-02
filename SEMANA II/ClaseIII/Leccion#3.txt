@@ -1,0 +1,145 @@
+Lección #3
+Fecha: 30 julio 2018
+++++++++++++++++++++++
+
+Temas:
+
+1) Repaso clase anterior
+2) Pirámide de documentación ISO
+3) Temas de cultura, Criptomenedas, Mercadeo de valores NASDAQ, Caída de acciones de Facebook
+4) Repaso de conceptos + vulnerabilidad 
+5) Controles operacionales, lista de controles
+6) Práctica con Roles en clase 2 partes.
+7) Ver videos del #4, #5, #6 para Kahoot próximo. (abajo los links)
+8) Tarea #1 se colgará en aula virtual y es necesario el ejercicio de la lección #3 como base
+=================================================================================
+
++ documentacion, piramide: SGSI: ISO 27001
+   +      ->  Política de Seguridad de la información // parrafo.
+  +++     ->  Manual / Guía  de la Seguridad de la información (Generales)
+ +++++    ->  Procedimientos (Procesos del quehacer de la empresa)
++++++++   ->  Instrucciones de Trabajo // Registros (electrónicos, fisicos)
+
+ISO 9001, es similar, pero cambian los nombre: EJ: Política de Calidad,
+Manual de Calidad, Procedimiento de Calidad, Instrucción de Calidad..
+
+Ej: Procedimiento:  Como brindarle permisos a un nuevo usuario de TI  en programación
+Mucho elementos técnicos.  Instrucciones de Trabajo.
+
+Ej: Instruccion:  Para crear el usuario::   CREATE USER...
+
+Cultura General...
+CRIPTOMONEDAS, 
+(Riesgo: Volatilidad, Extorsión.)
+
+MERCADOS DE VALORES
+Seguridad de Informacion (Facebook)
+
+REPASO:
++ Riesgo
++ Materializar (Ocurra)
++ Amenaza (Evento)
++ Probabilidad (0.0000000001 hasta 0.999999999999)
++ Impacto (Daño)
++ Vulnerabilidad (debilidad)
+
+
++CONTROLES OPERACIONALES
+----------------------------
+El objeto del control operacional es identificar aquellas operaciones y actividades sobre las que es necesario aplicar medidas de control, como consecuencia de su influencia en los riesgos identificados (en el Mapa de Calor), y de esta forma planificar tales actividades para que se desarrollen bajo condiciones especificadas.
+
+La unica forma de eliminar un riesgo, es eliminar el ACTIVO. (El origen)
+
+
+Ver lista de controles. Archivo: ControlesISO27002-2013.pdf
+enfasis en 7, 8
+
+OJO: Los controles los desarrolla cada empresa de acuerdo a sus necesidades.
+
+
+Continuación de la práctica:
+----------------------------
++Implementacion de Roles, como medida de control al asignar permisos para crear TABLAS
+, procedimientos, funciones y Vistas. (TAREA)
+
+1) Permisos para Crear al usuario
+2) Permisos para usar los objetos a OTROS usuarios por medio de roles.
+
+=================================================================================
+=================================================================================
+--PARTE #1 de la práctica en Clase
+--Como System  crear rol:  R_CREA_TABLA
+y a dicho rol le van a dar los permisos...
+-- La cuota del TABLESPACE si hay que brindarla directo al usuario.
+--1, DROPEAR ROL
+--2, CREAR EL ROLE 
+--los drops..
+DROP ROLE R_CREA_TABLA;
+--donde van los create user...
+CREATE ROLE R_CREA_TABLA;
+--en lugar de darle el permiso al usuario CONTA, se lo doy al ROL
+grant create table to R_CREA_TABLA;
+grant create session to R_CREA_TABLA;
+--falta agregar...
+grant R_CREA_TABLA to conta;
+--modificar el script para manejar roles..
+-- La cuota solo por ALTER...
+
+
+
+--CREAR FUNCION con el usuario CONTA.
+create or replace function fun_cant_emp return number is
+  VCant number;
+begin
+  select count(*) into VCant from empleado;
+  return(VCant);
+end fun_cant_emp;
+/
+
+=================================================================================
+
+
+-- PARTE #2 del Ejercicio...
+--(Crear un rol llamado R_CONSULTA  "dar estos permisos a dicho rol"
+--y dar el rol a JUAN) -- EL ROL R_CONSULTA lo debe crear CONTA,
+--a CONTA deben darle el permiso de "create role" por medio del rol
+--R_CREA_TABLA  
+--el rol R_CONSULTA lo puede dropear system
+--"dar estos permisos a dicho rol"
+--#2.4
+--grant select on empleado to R_CONSULTA;
+=================================================================================
+=================================================================================
+
+Video #4
+SGSI - 04 Estándares de Gestión de la Seguridad de la Información
+https://www.youtube.com/watch?v=vWAV0bdWvtI
+
+
+Video #5
+SGSI - 05 Implantación de un SGSI
+https://www.youtube.com/watch?v=i_3z68QGaJs
+
+
+Video #6
+SGSI - 06 Definición de las políticas, Organización, Alcance...
+https://www.youtube.com/watch?v=qawa_QcuFfc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
