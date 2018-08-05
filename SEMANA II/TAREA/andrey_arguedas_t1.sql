@@ -71,8 +71,11 @@ PROMPT ==========================================
 PROMPT Crear tabla empleado (codigo, nombre, salario) y la PK 
 PROMPT ambos en TABLESPACE SYSTEM
 
-create table empleado(codigo number not null primary key, nombre varchar2(10), salario number(5))
+create table empleado(codigo number not null, nombre varchar2(10), salario number(5))
 tablespace SYSTEM;
+
+alter table empleado
+ADD primary key (codigo);
 
 PROMPT ==========================================
 PROMPT Crear funcion fun_cant_emp
