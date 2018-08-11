@@ -1,0 +1,164 @@
+Lección #5
+----------
+
+Fecha:  09 Agosto 2018
+
+Semana #3
+
+---------------------------------------------------------------------------------------
+
+1) Repaso de la clase anterior.
+
+2) Tarea #3, Para Lunes 13 de agosto, 12:00PM
+Resúmen de documento:
+
+Gestión de Riesgos tecnológicos basada en ISO 31000 e ISO 27005 y su aporte a la continuidad de negocios
+
+3) Kahoot de la Tarea #3 el Lunes 13 de agosto.
+
+4) Continuación a Roles y Usuarios
+   Pre práctica #1 hoy, 
+   Práctica para la casa fin de semana.
+   Pre Práctica #2 13 agosto, 
+   Práctica en clases #1  Jueves 16 de Agosto en horario de clases.
+========================================================================================
+========================================================================================
+5) Pré práctica
+========================================================================================
+5.1)
+Basado en Lección#3 
+2018-07-30-roles8pm.sql
+crear:
+2018-08-09-PrePracticaRoles#1.sql
+========================================================================================
+5.2) Quitar todos los comentarios (doble --)
+========================================================================================
+5.3) Crear Procedimiento que Inserte Empleado
+   PRC_INS_EMP(PCodigo in number, PNombre in varchar2)
+   este lo creea el usuario CONTA
+   (esta version solo tiene codigo y nombre)
+   Similar a el Procedimiento de la TArea#1 solo que en lugar de update es insert, se debe aplicar commit;
+   
+   Debe ser creado el procedimiento luego de creada la tabla, 
+   Documente lo nuevo que agregue al script. (indicar sección 5.3 ....)
+(Probar Script!)
+========================================================================================
+5.4) Recuerde que ya existe el empleado #1, Juan, entonces el usuario conta (como dueño del procedimiento)
+ejecute el mismo e inserte el empleado #2 Ana (hacerlo luego del insert directo del empleado Juan..)
+--Tema lo investigaron en la Tarea #1 comando:
+EXECUTE .......
+
+(Documentar el script)
+
+(Probar Script!)
+
+========================================================================================
+5.5) Hasta este punto, solo debe aparecer este error:
+Connected.
+select * from conta.empleado
+                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+Corrija el error brindado el permiso al ROL que tenga el usuario que le genera este error..
+
+Debe aparecer así:
+
+Connected.
+
+    CODIGO NOMBRE
+---------- ----------
+         1 Juan
+         2 Ana
+========================================================================================
+5.6) Que juan intente insertar el empleado 3, Pedro, usando el procedimiento (al final del Script)
+conta.PRC_INS_EMP
+(debe generar error pues no tiene permisos)
+
+(Documentar el script)
+
+(Probar Script!)
+
+Genera este error esperado:
+ERROR at line 1:
+ORA-06550: line 1, column 7:
+PLS-00201: identifier 'CONTA.PRC_INS_EMP' must be declared
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+
+========================================================================================
+5.7) Brindar el permiso al ROL que tiene Juan, para que juan pueda ejectuar el insert usando el procedimiento
+y luego de la ejecución del procedimiento, hacer un select de la tabla de empleados, deben aparecer 3 empleados.
+
+
+Genera esta salida:
+5.6 Insertar 3, Pedro por Procedimiento
+
+PL/SQL procedure successfully completed.
+
+5.7 Select con los 3 empleados (consulta juan)
+
+    CODIGO NOMBRE
+---------- ----------
+         1 Juan
+         2 Ana
+         3 Pedro
+========================================================================================
+5.8) Separar los TABLESPACES de DATOS de los TABLESPACES de Indices.
+Crear estos tablespaces (Copiar y Pegar) esto los crean una unica vez, no hacerlos recursivos!!
+
+--Esto lo hace system (guardar este comando los que usan computadora de la UNA porque los podemos seguir usando.)
+CREATE TABLESPACE datos 
+datafile 'C:\oraclexe\app\oracle\oradata\XE\datos.DBF'
+SIZE 10M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+
+CREATE TABLESPACE indices 
+datafile 'C:\oraclexe\app\oracle\oradata\XE\indices.DBF'  
+SIZE 10M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+
+
+--los pueden dejar en el SCRIPT comentados... en notepad (CONTROL + Q)
+
+
+========================================================================================
+5.9)  Cambio de Versión start 2018-08-09-PrePracticaRoles#1a.sql (opcional)
+
+--quitar los permisos al TABLESPACE SYSTEM y bridarlos a los TABLESPACE
+DATOS e INDICES
+
+--Que conta cree la tabla en el tablespace datos
+
+
+(Documentar el script)
+
+(Probar Script!)
+No debe salir error...
+========================================================================================
+5.10) Crear el Primary Key (usar de ejemplo el de la tarea) a la tabla empleado
+pero usando el TBSP de Indices...
+
+usando:
+
+alter table.....
+esto lo hace el usuario conta, luego de crear la tabla.
+
+========================================================================================
+5.11) Colocar spool al inicio para guardar la salida a un archivo .log y spool off al final..
+
+Ejemplo:
+
+-- start 2018-08-09-PrePracticaRoles#1a.sql
+host cls
+PROMPT Version 2
+PROMPT Nos conectamos como system // 5.11) spool
+spool 2018-08-09-PrePracticaRoles#1a.log
+conn system/root
+
+..
+.
+
+select * from conta.empleado;
+spool off
+
+========================================================================================
+Fin de la Pré-Práctica #1

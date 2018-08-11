@@ -1,0 +1,124 @@
+Connected.
+5.8 Creación de tablespaces esto queda comentario, lo ejecuta system solo una vez
+Dropeamos el usuario conta
+
+User dropped.
+
+
+User dropped.
+
+
+Role dropped.
+
+
+Role dropped.
+
+Creamos el usuario CONTA (Sistema de Contabilidad)
+
+Role created.
+
+
+User created.
+
+
+User created.
+
+
+Grant succeeded.
+
+Brindar los permisos minimos.
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+5.9 Permisos en TBSP DATOS e INDICES
+
+User altered.
+
+
+User altered.
+
+
+Grant succeeded.
+
+Conexion con usuario CONTA
+Connected.
+
+Role created.
+
+5.9 Crear tabla en TBSP DATOS (modificar)
+
+Table created.
+
+5.10 Crear el PK en TBSP de Indices
+
+Table altered.
+
+5.3 Procedimiento Crear empleado
+
+Procedure created.
+
+No errors.
+
+Grant succeeded.
+
+
+Function created.
+
+
+1 row created.
+
+
+Commit complete.
+
+5.4 Insertar Ana por Procedimiento
+
+PL/SQL procedure successfully completed.
+
+
+  CANTIDAD                                                                      
+----------                                                                      
+         2                                                                      
+
+
+Grant succeeded.
+
+5.5 Permiso de select a tol RConsulta
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+Connected.
+
+    CODIGO NOMBRE                                                               
+---------- ----------                                                           
+         1 Juan                                                                 
+         2 Ana                                                                  
+
+
+  CANTIDAD                                                                      
+----------                                                                      
+         2                                                                      
+
+5.6 Insertar 3, Pedro por Procedimiento (lo hace juan)
+
+PL/SQL procedure successfully completed.
+
+5.7 Select con los 3 empleados (lo hace juan)
+
+    CODIGO NOMBRE                                                               
+---------- ----------                                                           
+         1 Juan                                                                 
+         2 Ana                                                                  
+         3 Pedro                                                                
+

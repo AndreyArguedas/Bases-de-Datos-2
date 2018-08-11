@@ -1,0 +1,129 @@
+Dropeamos el usuario conta
+
+User dropped.
+
+
+User dropped.
+
+
+Role dropped.
+
+
+Role dropped.
+
+Creamos el usuario CONTA (Sistema de Contabilidad)
+
+Role created.
+
+
+User created.
+
+
+User created.
+
+
+Grant succeeded.
+
+Brindar los permisos minimos.
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+User altered.
+
+
+User altered.
+
+
+Grant succeeded.
+
+Conexion con usuario CONTA
+Connected.
+
+Role created.
+
+
+Table created.
+
+5.10
+
+Table altered.
+
+
+Function created.
+
+5.3
+
+Procedure created.
+
+
+1 row created.
+
+
+Commit complete.
+
+5.4
+
+PL/SQL procedure successfully completed.
+
+
+  CANTIDAD                                                                      
+----------                                                                      
+         2                                                                      
+
+
+Grant succeeded.
+
+5.5 Permisos a Juan
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+5.7
+
+Grant succeeded.
+
+Connected.
+
+    CODIGO NOMBRE                                                               
+---------- ----------                                                           
+         1 Juan                                                                 
+         2 ANA                                                                  
+
+
+  CANTIDAD                                                                      
+----------                                                                      
+         2                                                                      
+
+5.6
+
+PL/SQL procedure successfully completed.
+
+5.7
+BEGIN conta.PRC_INS_EMP(3, 'Pedro'); END;
+
+*
+ERROR at line 1:
+ORA-00001: unique constraint (CONTA.SYS_C007005) violated 
+ORA-06512: at "CONTA.PRC_INS_EMP", line 4 
+ORA-06512: at line 1 
+
+
+
+    CODIGO NOMBRE                                                               
+---------- ----------                                                           
+         1 Juan                                                                 
+         2 ANA                                                                  
+         3 Pedro                                                                
+
