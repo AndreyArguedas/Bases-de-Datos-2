@@ -1,0 +1,151 @@
+========================================================================================
+
+Prepractica Continuación.
+
+Continuar la Pre-Práctica #1
+
+
+
+#6.1
+
+Cambiar el nombre del Spool y el nombre del archivo.
+
+
+
+========================================================================================
+
+
+
+#6.2 Crear procedimientos básicos de:
+
+INSERTAR. (ya en clase)
+
+ACTUALIZAR. (pendiente) usa el Codigo para actualizar el NOMBRE
+
+BORRAR. (pendiente) recibe por parametro el ID y borra el registro
+
+
+
++Probar que se creen bien todos los procedimientos, y que no haya errores.
+
++Documentar cada comando
+
+========================================================================================
+
+
+
+#6.3 Usuario CONTA debe crear el rol R_PROCESOS
+
+y dar permisos de ejecutar los 2 procedimientos nuevos al rol R_PROCESOS (recursivo)
+
+(ACTUALIZAR Y BORRAR solamente al rol R_PROCESOS)
+
+
+
++Probar
+
++Documentar
+
+========================================================================================
+
+#6.4 
+
+CONTA debe asignar el rol R_CONSULTA al rol R_PROCESOS, o sea
+
+todos los permisos que tenga R_CONSULTA se heredan a R_PROCESOS
+
+
+
++Probar
+
++Documentar
+
+
+
+========================================================================================
+
+#6.5
+
+Crear el usuario TOM, clave tom123, brindar permisos de create session
+
+(Crear el usuario y brindar estos permisos, lo hace SYSTEM)
+
++Probar 2 veces (por ser usuario nuevo la primera vez da error!)
+
++Documentar
+
+========================================================================================
+
+#6.6
+
+CONTA brinda el rol R_PROCESOS a el usuario tom
+
++Probar
+
++Documentar
+
+
+
+========================================================================================
+
+#6.7
+
+Al final del script (antes del spool off)
+
+connectarse como usuario tom, y ejecutar el 
+
+
+
+select * from conta.empleados
+
+
+
+Porqué funciona?
+
+
+
+
+
+Ojo:
+
+-No importa si primero se asigna R_PROCESOS a tom y luego R_CONSULTA a R_PROCESOS
+
+-O bien puede invertirse este orden, la herencia de los permisos funciona bien
+
+-probar invirtiendo el orden
+
+
+
+--Si pongo un comentario en la linea del #6.4, puedo ejecutar el select? (NO)
+
+
+
+
+
+Notar que estos permisos, puedo cambiar el orden de los mismos y no afecta 
+
+en ninguna manera la ejecución del script.
+
+
+
+PROMPT 5.5 
+
+grant select on empleado to R_CONSULTA;
+
+
+
+PROMPT 6.4
+
+grant R_CONSULTA to R_PROCESOS;
+
+
+
+PROMPT 6.6
+
+grant R_PROCESOS to tom;
+
+
+
+
+
+========================================================================================

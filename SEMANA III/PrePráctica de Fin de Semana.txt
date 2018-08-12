@@ -1,0 +1,186 @@
+--PrePráctica de Fin de Semana #2
+......................................................................
+......................................................................
+Por favor Leer todo el enuncuado primero.
+Revisar el .log adjunto como guía del resultado de la práctica
+Consulte en el grupo de WhatsApp si tienen dudas.
+Hay algunos permisos se que pueden dar en un solo comando, pruebe si puede
+hacerlo, sino haga "varios GRANT"
+esta práctica es individual, no debe entregarse
+......................................................................
+......................................................................
+
+1) Crear un script completamente nuevo: manuel_espinoza_pre2.sql
+Spool: manuel_espinoza_pre2.log
+
+así debe lucir el script:
+======================================
+
+-- start manuel_espinoza_pre2.sql
+host cls
+spool manuel_espinoza_pre2.log
+PROMPT Pre Practica #1
+PROMPT Nos conectamos como system
+conn system/root
+
+
+
+spool off
+======================================
+......................................................................
+......................................................................
+
+2) Con el usuario "system"
+Crear dos tablespaces de 20Megas de disco, espacio ilimitado.
+Con el nombre  IDX2 y DAT2 
+(debe colocar el nombre de los datafiles IDX2.DBF y DAT2.DBF)
+
+OJO: Similiar a la prepráctica de clases, solo cambiar 
+nombre del tablespace y nombre del archivo
+
+Además debe dropear dichos tablespaces (para hacerlo recursivo)
+debe dropear cada tablespace.
+
+Este es el comando para dropear el Tablespace:
+==============================================
+DROP TABLESPACE NOMBRE INCLUDING CONTENTS AND DATAFILES;
+==============================================
+
+Recuerde documentar con Prompt cada paso
+ejemplo:
+========
+PROMPT #2
+
+Nota #1: Puede comentar los 2 DROP de tablespace y los 2 CREATE de tablespace
+despues de una ejecución para que el script corra mas rápido, luego en la versión
+final, lo descomenta y prueba todo el script completo dos veces al final.
+
+Nota #2: El script, al inicio SIEMPRE debe conectarse con system, porque al final
+del script queda con otro usuario.
+......................................................................
+......................................................................
+3) "system" debe:
+
+3.1)
+Crear el usuario "proyecto", clave p123
+(Igual recursivo)
+
+3.2)
+"system" además debe crear el rol R_PROYECTO
+
+3.3)
+A dicho rol "system" debe darle los permisos mínimos para: conectarse, crear tablas, procedimientos,
+funciones, roles.
+
+3.4)
+"system" debe brindar el rol R_PROYECTO al usuario "proyecto"
+
+3.5) "system" Debe darle cuota ilimitada a "proyecto"
+en los tablespaces IDX2 y DAT2 
+......................................................................
+......................................................................
+4) 
+Conectarse con "proyecto"
+
+4.1) Crear los siguientes roles "R_CON1" "R_ACT1" "R_INS1" "R_BOR1"
+"R_ADM1" (recuerde el DROP como system para hacerlo recursivo)
+
+4.2) Crear la tabla BODEGAS. En el Tablespace DAT2
+
+ID          number(5),
+NOMBRE      varchar2(10),
+INVENTARIO  number(5)
+
+4.3) Crear la llave primaria en la tabla BODEGAS con el nombre BODEGAS_PK
+y el indice en el Tablespace IDX2
+
+4.4) Brindar el permiso de seleccionar la tabla BODEGAS al rol R_CON1
+
+4.5) Crear un procedimiento para INSERTAR en la tabla BODEGAS (parametros: ID, Nombre, Inventario)
+
+4.6) Crear un procedimiento para ACTUALIZAR el nombre y el inventario con base en el ID indicado,
+en la tabla BODEGAS
+
+4.7) BORRAR en la tabla BODEGAS
+solo recibe por parámetro el ID a borrar
+......................................................................
+5)
+Igual conectado como "proyecto" se procede a brindar los permisos restantes
+
+ "" "" ""
+"" (recuerde el DROP como system para hacerlo recursivo)
+
+5.1) Brindar el permiso de:
+ejecutar el procedimiento de ACTUALIZAR bodegas al rol R_ACT1
+ejecutar el procedimiento de INSERTAR bodegas al rol R_INS1
+ejecutar el procedimiento de BORRAR bodegas al rol R_BOR1
+
+5.2) Un rol puede ser asignado a otro rol, entonces
+puede brindar al rol R_ADM1 (ROL ADMINISTRADOR) que tenga todos los 
+roles (R_ACT1, R_INS1, R_BOR1, R_CON1)
+......................................................................
+6) 
+Luego de los permisos del punto #5, al inicio del Script , 
+conectado como "system":
+
+6.1) Crear los usuarios / claves:
+
+boby  / b123
+peter / p123
+tina  / t123
+grace / g123
+
+6.2)
+brindarle a los usuarios anteriores el permiso de conexión de forma directa.
+ 
+......................................................................
+7) En la sección del script donde está conectado "proyecto"
+continuar con lo siguiente (buscar dónde sea adecuado) :
+
+7.1) brindarle a boby permisos de seleccionar la tabla por medio del rol 
+correspondiente
+7.2) brindarle a peter el mismo rol de boby y el rol de INSERTAR
+7.3) brindarle a tina (los mismos roles de peter) y el de ACTUALIZAR
+7.4) bridarle a grace solo el rol ADMINISTRADOR
+......................................................................
+8) Conectarse y probar.
+
+8.1) conectarse con peter: Probar hacer un INSERT con el procedimiento
+y luego un SELECT en BODEGAS
+PRC_INS_BOD(1,'Tibas',1500)
+
+8.2) conectarse con boby y probar: 
+Probar hacer un INSERT con el procedimiento:
+execute proyecto.PRC_INS_BOD(2,'Uruca',2500);
+--Genera un "error esperado"
+Hacer un SELECT directo en la tabla (solo aparece un registro)
+
+8.3) conectarse con tina, y probar el SELECT y todos los procedimientos
+primero INSERTAR:    (3,'Llorente',3500)
+hacer select
+luego ACTUALIZAR:    (3,'LLORENTE',4500)
+hacer select
+luego BORRAR:        (3)
+hacer select
+
+Nota: En borrar se presenta un "error esperado", pues tina no tiene ese permiso!
+
+8.4) conectarse con grace, y probar el SELECT y todos los procedimientos
+primero INSERTAR:    (4,'Liberia',8500)
+hacer select
+luego ACTUALIZAR:    (3,'LIBERIA',9000)
+hacer select
+luego BORRAR:        (3)
+hacer select
+
+Nota: Funciona bien, porque tiene todos los roles agrupados por el rol de ADMINISTRADOR
+
+En total: Dos Errores Esperados!
+
+......................................................................
+9) Analice conclusiones sobre lo realizado.
+
+9.1) Comente cada línea de las acciones del Script (no los PROMPT!)
+y ejecute el script, analice, cómo afecta cada sección, por ejemplo
+si no se puede conectar, si no tiene permiso de CUOTA en un TABLESPACE
+......................................................................

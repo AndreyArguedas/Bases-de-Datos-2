@@ -11,6 +11,9 @@ Role dropped.
 
 Role dropped.
 
+
+Role dropped.
+
 Creamos el usuario CONTA (Sistema de Contabilidad)
 
 Role created.
@@ -65,11 +68,41 @@ Function created.
 
 Procedure created.
 
+6.2
+
+Procedure created.
+
+
+Procedure created.
+
+6.3
+
+Role created.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+6.4
+
+Grant succeeded.
+
 
 1 row created.
 
 
 Commit complete.
+
+
+PL/SQL procedure successfully completed.
+
+
+PL/SQL procedure successfully completed.
+
+
+PL/SQL procedure successfully completed.
 
 5.4
 
@@ -98,7 +131,7 @@ Connected.
 
     CODIGO NOMBRE                                                               
 ---------- ----------                                                           
-         1 Juan                                                                 
+         1 Juancito                                                             
          2 ANA                                                                  
 
 
@@ -117,8 +150,8 @@ PL/SQL procedure successfully completed.
 
     CODIGO NOMBRE                                                               
 ---------- ----------                                                           
+         1 Juancito                                                             
+         2 ANA                                                                  
          3 Pedro                                                                
          4 Juana                                                                
-         1 Juan                                                                 
-         2 ANA                                                                  
 
