@@ -6,6 +6,9 @@ User dropped.
 User dropped.
 
 
+User dropped.
+
+
 Role dropped.
 
 
@@ -23,6 +26,13 @@ User created.
 
 
 User created.
+
+6.5
+
+User created.
+
+
+Grant succeeded.
 
 
 Grant succeeded.
@@ -89,6 +99,10 @@ Grant succeeded.
 
 Grant succeeded.
 
+6.6
+
+Grant succeeded.
+
 
 1 row created.
 
@@ -147,6 +161,16 @@ PL/SQL procedure successfully completed.
 
 PL/SQL procedure successfully completed.
 
+
+    CODIGO NOMBRE                                                               
+---------- ----------                                                           
+         1 Juancito                                                             
+         2 ANA                                                                  
+         3 Pedro                                                                
+         4 Juana                                                                
+
+6.7
+Connected.
 
     CODIGO NOMBRE                                                               
 ---------- ----------                                                           

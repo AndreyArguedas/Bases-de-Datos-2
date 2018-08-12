@@ -18,6 +18,7 @@ spool ContinuacionLeccion5.log
 PROMPT Dropeamos el usuario conta
 drop user conta cascade;
 drop user juan cascade;
+drop user tom cascade;
 
 DROP ROLE R_CREA_TABLA;
 
@@ -30,8 +31,12 @@ PROMPT Creamos el usuario CONTA (Sistema de Contabilidad)
 CREATE ROLE R_CREA_TABLA;
 create user conta identified by conta123;
 create user juan identified by juan123;
-grant create session to juan;
 
+PROMPT 6.5
+
+create user tom identified by tom123;
+grant create session to juan;
+grant create session to tom;
 PROMPT Brindar los permisos minimos.
 
 grant create table to R_CREA_TABLA;
@@ -112,6 +117,10 @@ PROMPT 6.4
 -- CONTA debe asignar el rol R_CONSULTA al rol R_PROCESOS
 grant R_CONSULTA to R_PROCESOS;
 
+PROMPT 6.6
+--CONTA brinda el rol R_PROCESOS a el usuario tom
+grant R_PROCESOS to tom;
+
 
 insert into empleado (codigo,nombre) values (1,'Juan');
 commit;
@@ -151,6 +160,12 @@ execute conta.PRC_INS_EMP(3, 'Pedro');
 --5.7
 PROMPT 5.7
 execute conta.PRC_INS_EMP(4, 'Juana');
+select * from conta.empleado;
+
+PROMPT 6.7
+
+conn tom/tom123
+
 select * from conta.empleado;
 
 
