@@ -99,5 +99,12 @@ begin
 end Borrar;
 /
 
+PROMPT 5.1
+grant execute on Actualizar to R_ACT1;
+grant execute on INSERTAR to R_INS1;
+grant execute on Borrar to R_BOR1;
+
+PROMPT 5.2
+
 spool off
 PROMPT ======================================
