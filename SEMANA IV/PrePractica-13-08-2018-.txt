@@ -1,0 +1,125 @@
+PrePractica 13-08-2018
+
+OJO:
+
+Nombre: manuel_espinoza_pre3A.sql
+Nombre: manuel_espinoza_pre3B.sql
+
+====================================================================================================
+====================================================================================================
+PRELIMINAR: LIMPIAR BD!
+
+Conectarse como system, crear el rol
+Dropear Roles y usuarios de prácticas anteriores 
+Nota: correr solo una vez, esto no es parte del Script, es solo para limpiar la 
+base de datos de todas las prácticas anteriores.
+
+--manuel_espinoza_pre2.sql
+drop user proyecto cascade;
+drop user boby cascade;
+drop user peter cascade;
+drop user tina cascade;
+drop user grace cascade;
+drop role R_PROYECTO;
+drop role R_CON1;
+drop role R_ACT1;
+drop role R_INS1;
+drop role R_BOR1;
+drop role R_ADM1
+
+--Pre8pm.sql
+drop user conta cascade;
+drop user juan cascade;
+DROP ROLE R_CREA_TABLA;
+DROP ROLE R_CONSULTA;
+
+--Adicional
+drop user tom cascade;
+DROP ROLE R_PROCESOS;
+
+--Tarea
+drop user pedro cascade;
+DROP ROLE R_ACTUALIZA;
+
+====================================================================================================
+====================================================================================================
+Lea todo el enunciado antes de iniciar la programación.
+
+1)  Con el usuario system
+
+crear el usuario planilla, darle los permisos mínimos para crear TABLAS  (tablespace USERS que ya existe)
+
+además permisos para crear procedimientos, funciones, vistas, crear roles
+
+2) Conectarse con el usuario planilla:
+
+2.1)
+Crear una tabla DEPARTAMENTOS: con estos campos
+ID           number(3)    not null,
+NOMBRE       varchar2(10) not null,
+FEC_INICIO   date         not null,
+SAL_MAX      number(5)    not null
+
+2.2) Crear Llave Primaria en Tablespaces USERS, campo ID
+
+2.3) Crear un procedimiento para INSERTAR (parametros TODOS los campos) PRC_INS_DEPTO
+Todos los procedimientos con el commit dentro del procedimiento.
+
+2.4) Crear procedimiento para ACTUALIZAR (parametros TODOS los campos, usa el ID para actualizar el resto de valores).
+PRC_ACT_DEPTO
+Todos los procedimientos con el commit dentro del procedimiento.
+
+2.5) Crear procedimiento para BORRAR (de parametro solo el ID)
+PRC_BORR_DEPTO
+Todos los procedimientos con el commit dentro del procedimiento.
+
+2.6) Crear vista, que muestre el nombre del departamento y el salario maximo
+REP_DEPTO
+
+2.7) Planilla crea los roles:  R_USUARIO, R_JEFE
+
+2.8) Brindar los permisos de seleccionar la vista e insertar por medio del procedimiento al ROL
+R_USUARIO
+
+2.9) Brindar los permisos de ACTUALIZAR y BORRAR (procedimientos) al rol R_JEFE
+
+2.10) Al rol R_JEFE asignar el rol R_USUARIO
+
+3) System debe crear los usuarios  RMORA y FGARCIA, ademas debe brindarle los permisos minimos de conectarse.
+
+3.1) PLANILLA debe asignarle el rol R_JEFE a RMORA y el rol R_USUARIO a FGARCIA.
+
+3.2) RMORA debe insertar los departamentos:  
+PRC_INS_DEPTO(1, Ventas, sysdate, 4000);
+PRC_INS_DEPTO(2, Compras, sysdate, 5000);
+
+3.3) RMORA debe además ejecutar PRC_ACT_DEPTO para cambiar el 
+Depto #1 con los siguientes valores: VTAS, sysdate, 4100
+
+3.4) RMORA debe ejecutar el procedimiento PRC_BORR_DEPTO para borrar el departamento #2
+
+3.5) RMORA debe hacer un select de la vista.
+
+3.6) Se debe conectar como FGARCIA y debe insertar los departamentos:  
+PRC_INS_DEPTO(3, Conta, sysdate, 1300);
+PRC_INS_DEPTO(4, Cajas, sysdate, 1200);
+
+3.7) FGARCIA debe además ejecutar PRC_ACT_DEPTO para cambiar el 
+Depto #3 con los siguientes valores: CONTA, sysdate, 2300
+
+3.8) FGARCIA debe ejecutar el procedimiento PRC_BORR_DEPTO para borrar el departamento #2
+
+3.9) FGARCIA debe hacer un select de la vista.
+
+4) Documente en el mismo script con PROMPT los "errores esperados" donde se generen y porqué.
+
+5) Haga una segunda version del Script, 
+
+Nombre: manuel_espinoza_pre3B.sql
+
+con los permisos mínimos para corregir los "errores esperados"
+y elimine los comentarios de los errores esperados, esta última versión debe correr bien completa, 
+recursiva y sin errores.
+
+====================================================================================================
+====================================================================================================
