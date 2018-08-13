@@ -6,9 +6,50 @@ Connected.
 User dropped.
 
 
+User dropped.
+
+
+User dropped.
+
+
+User dropped.
+
+
+User dropped.
+
+
 User created.
 
+6.1
+
+User created.
+
+
+User created.
+
+
+User created.
+
+
+User created.
+
+6.2
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
 #3.2
+
+Role dropped.
+
 
 Role dropped.
 
@@ -66,6 +107,9 @@ Role created.
 
 Role created.
 
+
+Role created.
+
 #4.2
 
 Table created.
@@ -99,4 +143,136 @@ Grant succeeded.
 
 
 Grant succeeded.
+
+5.2
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+7.1
+
+Grant succeeded.
+
+7.2
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+7.3
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+7.4)
+
+Grant succeeded.
+
+8.1
+Connected.
+
+PL/SQL procedure successfully completed.
+
+
+        ID NOMBRE     INVENTARIO                                                
+---------- ---------- ----------                                                
+         1 Tibas            1500                                                
+
+8.2
+Connected.
+BEGIN proyecto.INSERTAR(2,'Uruca',2500); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00201: identifier 'PROYECTO.INSERTAR' must be declared 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+
+        ID NOMBRE     INVENTARIO                                                
+---------- ---------- ----------                                                
+         1 Tibas            1500                                                
+
+8.3
+Connected.
+
+PL/SQL procedure successfully completed.
+
+
+        ID NOMBRE     INVENTARIO                                                
+---------- ---------- ----------                                                
+         3 Llorente         3500                                                
+         1 Tibas            1500                                                
+
+
+PL/SQL procedure successfully completed.
+
+
+        ID NOMBRE     INVENTARIO                                                
+---------- ---------- ----------                                                
+         3 LLORENTE         4500                                                
+         1 Tibas            1500                                                
+
+BEGIN proyecto.Borrar(3); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00201: identifier 'PROYECTO.BORRAR' must be declared 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+
+        ID NOMBRE     INVENTARIO                                                
+---------- ---------- ----------                                                
+         3 LLORENTE         4500                                                
+         1 Tibas            1500                                                
+
+8.4
+Connected.
+
+PL/SQL procedure successfully completed.
+
+
+        ID NOMBRE     INVENTARIO                                                
+---------- ---------- ----------                                                
+         3 LLORENTE         4500                                                
+         1 Tibas            1500                                                
+         4 Liberia          8500                                                
+
+
+PL/SQL procedure successfully completed.
+
+
+        ID NOMBRE     INVENTARIO                                                
+---------- ---------- ----------                                                
+         3 LIBERIA          9000                                                
+         1 Tibas            1500                                                
+         4 Liberia          8500                                                
+
+
+PL/SQL procedure successfully completed.
+
+
+        ID NOMBRE     INVENTARIO                                                
+---------- ---------- ----------                                                
+         1 Tibas            1500                                                
+         4 Liberia          8500                                                
 
