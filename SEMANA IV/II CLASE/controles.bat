@@ -6,6 +6,8 @@ ECHO. --Controles en BD---
 ECHO 1. Borrar y Crear Usuario
 ECHO 2. Crear Tabla
 ECHO 3. Borrar Tabla
+ECHO 4. Listar Usuarios
+ECHO 5. Listar Usuarios Test
 ECHO 0. Salir
 
 set choice=
@@ -14,6 +16,8 @@ if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto OptUsuario
 if '%choice%'=='2' goto OptCreaTabla
 if '%choice%'=='3' goto OptBorraTabla
+if '%choice%'=='4' goto OptListarUsuarios
+if '%choice%'=='5' goto OptListarUsuariosTest
 if '%choice%'=='0' goto OptSalir
 ECHO "%choice%" Opcion incorrecta.
 pause
@@ -30,6 +34,14 @@ goto start
 
 :OptBorraTabla
 start C:\controles\borra_tabla.bat
+goto start
+
+:OptListarUsuarios
+start C:\controles\ListarUsuarios.bat
+goto start
+
+:OptListarUsuariosTest
+start C:\controles\OptListarUsuariosTest.bat
 goto start
 
 :OptSalir

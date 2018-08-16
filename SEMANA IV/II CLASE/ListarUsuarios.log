@@ -1,0 +1,26 @@
+
+   USER_ID USERNAME                                                             
+---------- ------------------------------                                       
+2147483638 XS$NULL                                                              
+        49 TEST                                                                 
+        47 APEX_040000                                                          
+        45 APEX_PUBLIC_USER                                                     
+        44 FLOWS_FILES                                                          
+        43 HR                                                                   
+        42 MDSYS                                                                
+        35 ANONYMOUS                                                            
+        34 XDB                                                                  
+        32 CTXSYS                                                               
+        30 APPQOSSYS                                                            
+
+   USER_ID USERNAME                                                             
+---------- ------------------------------                                       
+        29 DBSNMP                                                               
+        21 ORACLE_OCM                                                           
+        14 DIP                                                                  
+         9 OUTLN                                                                
+         5 SYSTEM                                                               
+         0 SYS                                                                  
+
+17 rows selected.
+
