@@ -8,6 +8,8 @@ ECHO 2. Crear Tabla
 ECHO 3. Borrar Tabla
 ECHO 4. Listar Usuarios
 ECHO 5. Listar Usuarios Test
+ECHO 6. Crear Tablespace DATOS 10M
+ECHO 7. Dropear Tablespace DATOS 10M
 ECHO 0. Salir
 
 set choice=
@@ -18,6 +20,8 @@ if '%choice%'=='2' goto OptCreaTabla
 if '%choice%'=='3' goto OptBorraTabla
 if '%choice%'=='4' goto OptListarUsuarios
 if '%choice%'=='5' goto OptListarUsuariosTest
+if '%choice%'=='6' goto OptCrearTablespace
+if '%choice%'=='7' goto OptDropTablespace
 if '%choice%'=='0' goto OptSalir
 ECHO "%choice%" Opcion incorrecta.
 pause
@@ -42,6 +46,14 @@ goto start
 
 :OptListarUsuariosTest
 start C:\controles\OptListarUsuariosTest.bat
+goto start
+
+:OptCrearTablespace
+start C:\controles\OptCrearTablespace.bat
+goto start
+
+:OptDropTablespace
+start C:\controles\OptDropTablespace.bat
 goto start
 
 :OptSalir

@@ -1,5 +1,6 @@
 
  OBJECT_ID OBJECT_TYPE                    OBJECT_NAME                           
 ---------- ------------------------------ ------------------------------        
-     20151 TABLE                          TAB1                                  
+     20153 TABLE                          TAB2                                  
+     20152 TABLE                          TAB1                                  
 
