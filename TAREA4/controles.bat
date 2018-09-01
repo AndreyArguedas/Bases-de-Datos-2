@@ -6,6 +6,7 @@ ECHO. --ANDREY ARGUEDAS ESPINOZA---
 ECHO. --		TAREA #4        ---
 ECHO 1. Objetos por usuario
 ECHO 2. Reporte ejecutivo de Cantidad de Objetos por usuario
+ECHO 3. Comprimir, encriptar y aplicar NAMEDATE
 
 ECHO 0. Salir
 
@@ -14,6 +15,7 @@ set /p choice=Indique la tarea correspondiente:
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto OptUsuario
 if '%choice%'=='2' goto OptReporteObjUsuario
+if '%choice%'=='3' goto OptComprimirEncriptarNameDate
 if '%choice%'=='0' goto OptSalir
 ECHO "%choice%" Opcion incorrecta.
 pause
@@ -26,6 +28,10 @@ goto start
 
 :OptReporteObjUsuario
 start C:\TAREA4\OptReporteObjUsuario.bat
+goto start
+
+:OptComprimirEncriptarNameDate
+start C:\TAREA4\OptComprimirEncriptarNameDate.bat
 goto start
 
 :OptSalir
