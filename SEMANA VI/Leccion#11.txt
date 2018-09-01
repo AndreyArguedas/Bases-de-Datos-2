@@ -1,0 +1,157 @@
+Lección #11
+===========
+30-08-2018
+
+Semana #6
+
+0) Repaso rápido.
+
+1) Tema general. cambios de horarios. se complica. no se puede permitir cambios de horarios de grupos!
+
+2) Fecha Proyecto avance #1, 23-set-2018  6pm Aula Virtual
+   Fecha Tarea #4: Domingo 02 setiembre 10pm, Aula Virtual
+
+3) Tema de Respaldos de Oracle:
+   export: Utilitario, linea de comando.
+   Otras Herramientas de Oracle:
+   +RMAN
+   +ARCHIVE de la base de datos.
+   ++Nube:
+   Respaldos.  Maquina Virtual en la Nube. SNAPSHOTS, en caliente.
+   PARTE DE LOS CONTROLES.... C.I.D. 
+   Respaldos cumplen con la Disponibilidad de la informacion
+   Confidencialidad : Los permisos.
+   
+   Utilitario:  exp -help
+   PARFILE: Parametro que permite, indicar un archivo de entrada de los parametros de mi respaldo.
+   
+   hr.par listo!
+   
+   --llamar en el .BAT
+   exp parfile=hr.par
+   
+   --respaldo de toda la base de datos.
+   exp parfile=full.par
+   =========================================================
+   Video Clase: Oracle Respaldo usando exp  / 30-08-2018
+   https://www.youtube.com/watch?v=2KoalOhbCQI
+   =========================================================
+   
+     Práctica en Clase:
+     hacer 2 bat.  full.bat hr.bat (son 6 lineas de comando en cada .bat, fácil!)
+     ==============================
+     Solo hace el respaldo (no llama a SQLPLUS ni leer parametros
+     en pantalla, ni crear HTML o XML, ni leer parametros de .ini)
+     (cada .bat crea el respaldo, luego con el .dmp lo: 
+     1.comprime, 2.encripta y 3. Renombra con el NAMEDATE
+     y luego de renombrar el archivo, borra el .7z y borra el .dmp
+     C:\bd2\namedate.exe /Y /ZZ:"F(Y-m-d)-(H-M-S).X" C:\bd2\hr.7z.aes
+  
+     NOTA: no usar el start
+       En las computadoras del aula, 
+       reinstalar AESCRYPT y 7z ( pues namedate solo se descomprime)
+       Para revisar errores:
+
+       Técnicas de depuracion
+      =======================
+       USEN pause, cuando se presenta un error, para revisar!
+       Correr el .BAT, linea por linea y revisan en pantalla!
+       Revisar Sintáxis, parámetros
+       USAR: stdout stderr
+             Errores en parametros
+       DIVIDIR el archivo .BAT en partes, ir probando en partes!
+       Archivos de Error Ext  .err (archivos de texto)
+       Archivo .err si está vacio, NO HAY ERROR!
+       
+       OJO esto manda stdout stderr a nul (ni a pantalla, ni a archivo):
+       C:\bd2\7z.exe j C:\bd2\hr.7z C:\bd2\hr.dmp 1> nul 2> nul
+
+	   
+============================
+Solución de Práctica en Clase:
+--EJEMPLO ASI QUEDA hr.bat, simple y sencillo! (practica en clase del 30-08-2018)
+--con estandar error y estandar output. con APPEND a los archivos
+============================
+
+REM respaldo
+exp parfile=C:\bd2\hr.par
+
+REM Comprime
+C:\bd2\7z.exe a C:\bd2\hr.7z C:\bd2\hr.dmp 1>> C:\bd2\comp_hr.log 2>> C:\bd2\comp_hr.err 
+
+REM encriptar
+C:\bd2\aescrypt.exe -e -p clave123 C:\bd2\hr.7z 1>> C:\bd2\enc_hr.log 2>> C:\bd2\enc_hr.err 
+
+REM renombrar
+C:\bd2\namedate.exe /Y /ZZ:"F(Y-m-d)-(H-M-S).X" C:\bd2\hr.7z.aes
+
+REM borrar
+del C:\bd2\hr.7z
+del C:\bd2\hr.dmp
+
+
+
+
+====================
+Aclaracion Tarea #4
+====================
+select to_char(sysdate, 'dd-mm-yyyy hh24:mi:ss')
+from dual;
+
+HTML Sencillo!!
+
+RECORDAR!!!!
+--TAREA MORAL: PRACTICA EN CASA: probar quitando estos parametros
+set pagesize 0
+set linesize 100
+set feedback off
+set verify off
+
+el XML con las etiquetas que gusten, pero que se respete el formato XML!
+
+en XML esto no: colocarle un titulo apropiado en AZUL, FECHA Y HORA
+
+--la idea es que ustedes lo generen CONCATENANDO , 
+no usar otras herramientas (No usar una herramienta esa que trae ORACLE: XMLELEMENT)
+
+Ejemplo:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<listobjetos>
+  <usuario>SYSTEM</usuario><objetos>125</objetos>
+  <usuario>SYS</usuario><objetos>566</objetos>
+  ...
+  ..
+</listobjetos>
+
+============================
+Aclaracion Tarea #4 (Adicional)
+
+1) borrar 7z (ademas en la opcion #5)
+
+2) Tener cuidado en general:
+ojo con /p 
+ojo con los OBJETOS que usa dual cuando es pintar una vez
+la VISTA DBA_OBJECTS cuando es pintar los objetos de los usuarios
+
+3) comprimido.ini
+TAREA4(2018-28-08)-(19-20-01).7z.aes
+
+2 opciones:
+a) Generar un archivo.ini con el nombre del archivo 7z
+dir /b *.7z > archivo.ini
+
+b) Descomprimir con valor posicional de la variable, pues es fijo ej: 
+SET VVar1=%Var1:~25,100%
+
+TAREA4(2018-28-08)-(19-20-01).7z.aes
+extraer para obtener:
+TAREA4(2018-28-08)-(19-20-01).7z
+Y usar para descomprimir
+
+Aclarar .ini:   sin el tamaño, ni fecha, (cuando hago un dir *.aes) 
+
+
+
+================================================================================================================
+fin....

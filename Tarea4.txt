@@ -1,0 +1,106 @@
+Tarea #4 (Version Completa) Individual!
+Entregar: Domingo 02 setiembre 10pm
+
+En aula Virtual EXCLUSIVAMENTE, Todos los grupos entregan a la misma hora, 
+Entregan un solo archivo con nombre:   t4_manuel_espinoza.7z (todos los archivos de la carpeta C:\TAREA4\ )
+Debe comprimir los EXE tambien, .INI, .BAT .SQL
+
+La clave de system debe ser root
+
+Crear un menu nuevo solo con las siguientes opciones
+Debe colocar su nombre en el Menu de opciones
+y colocar TAREA #4
+
+Use nombres de archivos adecuados para los .bat, .sql, .xml, .ini
+
+Sin excepcion
+Nombre de Carpeta:  C:\TAREA4\ 
+Colocar allí todos los archivos .BAT .SQL, .INI, EXE, DLL que se necesiten para que la tarea funcione
+adecuadamente
+
+Usar ruta completa en todos los archivos ejemplo: C:\TAREA4\Salida.html
+
+A continuación las opciones de Menu, son 5 opciones:
+=======================================================
+=======================================================
+
+1) Objetos por usuario.
+=======================
+Que reciba por parametro un usuario (SYSTEM, SYS)
+y un tipo de objeto (ejemplo TABLE, VIEW) y muestre de DBA_OBJECTS
+esa lista de objetos (Mostrar Columna OBJECT_NAME) 
+y en la parte superior del reporte
+La fecha y hora actual en color VERDE
+Los Parametros indicados (USUARIO: _______ TIPO OBJETO: ________) Color AZUL
+(Filtrar columna OWNER y OBJET_TYPE de DBA_OBJECTS)
+
+Pintar un reporte en HTML, usar como parametro archivo parametros.ini (ya visto)
+llamando la ruta del navegador web (MOZILLA o CHROME)
+
+
+
+2) Crear Opción de Menu: Reporte ejecutivo de Cantidad de Objetos por usuario
+=======================================================
+No recibe parametros, colocarle un titulo apropiado en AZUL, FECHA Y HORA
+select owner, count(*) cantidad
+from   dba_objects
+group by owner
+order by 1;
+Enviar la salida a un archivo .XML, crear un parametro #2 (ya usamos #1 en parametros.ini ) para la ruta del NOTEPAD++ (identificar con
+dir /x) y leer dicho parametro para que se abra el archivo XML leyendo el parametro para abrirlo 
+con NOTEPAD++
+
+Con formato XML, como si fuese necesario enviarlo a un WEB SERVICES como parametro
+
+
+3) Opcion para comprimir, encriptar y aplicar NAMEDATE
+=======================================================
+Debe aplicar : comprimir, Encriptar, aplicar el NAMEDATE para los archivos XML y .HTML de los puntos anteriores
+Para eso debe definir un nombre de archivo de parametro en parametros.ini
+(usar el #3 para el nombre del archivo)
+
+
+Ruta del Navegador Web:  C:\PROGRA~2\Google\Chrome\Application\chrome.exe
+Ruta de Notepad++:       C:etc...
+Nombre del Archivo:      TAREA4
+
+Entonces debe leer el parametro #2 en parametros.ini para colocar el nombre del archivo
+
+Como primero comprime queda TAREA4.7z (debe contener el HTML y el XML), luego que encripta queda TAREA4.7z.aes
+
+Para encriptar: (definen una clave, o tambien pueden crear un parametro en parametros.ini -opcional-) 
+
+Luego de comprimir, encriptar y aplicar NAMEDATE
+
+Al final debe quedar ejemplo: TAREA4(2018-28-08)-(19-20-01).7z.aes
+Debe borrar el XML, HTML, y el 7z (solo queda el .aes ya con el NAMEDATE aplicado)
+
+
+Ademas:
+Con este comando va a generar el nombre del archivo generado, para almacenarlo como texto.
+dir /b *.aes > comprimido.ini
+
+Haga que comprimido.ini se muestre en un NOTEPAD.EXE, solo el nombre del ARCHIVO
+sin el tamaño, ni fecha, solo debe contener el nombre del archivo.
+
+Ese archivo debe tener un nombre FIJO, ejemplo comprimido.ini ya que el nombre del archivo .aes puede cambiar 
+cada vez que se genere, entonces se guarda solo el nombre completo en ese archivo .ini que luego usaremos.
+
+4) Opcion para Desencriptar, Descomprimir y volver a abrir los archivos
+=======================================================
+Lea: comprimido.ini
+con ese nombre, debe Desencriptar, Descomprimir y volver a abrir los archivos
+
+Abrir en NOTEPAD++.EXE el XML (usando el Parametro posicional #2)
+Abrir el Navegador Web seteado (usando el Parametro posicional #1)
+
+5) Opcion borrar archivos de salida.
+=======================================================
+Borra los XML, HTML, .aes, comprimido.ini
+
+Pruebas:
+
+Existen errores esperados, por ejemplo si aplico opción #5 y luego #4 no hay archivos!
+O tambien si aplico #5 y #3
+
+Las opciones correctas son #1, #2, #3, #4, #5 y luego puedo volver a empieza... 1,2,3,4,5..

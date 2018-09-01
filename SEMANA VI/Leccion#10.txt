@@ -1,0 +1,126 @@
+
+Lección #10
+
+===========
+
+Semana #6
+
+
+
+1) Repaso
+
+2 caracteres el menu:
+
+if not '%choice%'=='' set choice=%choice:~0,2%
+
+
+
+--buscar el like....
+
+where  username like '%'||'&1'||'%'
+
+where  username like '&1'||'%'
+
+
+
+--TAREA MORAL: PRACTICA EN CASA: probar quitando estos parametros
+
+set pagesize 0
+
+set linesize 100
+
+set feedback off
+
+set verify off
+
+
+
+
+
+3) Arquitectura 32bits / 64bits
+
+Clic derecho en la tecla de Ventana.
+
+Revisar la arquitectura.
+
+
+
+#1) herramientas
+
+7zip:      7z1805-x64.exe
+
+aescrypt:  AESCrypt_v310_x64.zip  AESCrypt.msi
+
+namedate:  namedate7-10.zip NameDate by James Greene (no es un instalador) (Descomprimir en C:\controles\) queda namedate.exe 
+
+
+
+#2) Copiar el ejecutable de 7zip 
+
+C:\Program Files\7-Zip
+
+(7z.exe) copiar a a C:\controles\
+
+
+
+#3) Copiar el ejecutable (los DLL) de aescrypt (los 3 archivos)
+
+C:\Program Files\AESCrypt
+
+y colocar en 
+
+C:\controles\
+
+
+
+#4) Practica en clase
+
+Desencriptar
+
+Errores:
+
++Editar un archivo que no es
+
++Copiar AESCrypt sin instalar
+
++No quitar el start del encriptar o comprimir
+
++++RECOMENDACION en todas partes la ruta completa del archivo
+
+
+
+#5) namedate.exe
+
+
+
+#6)  stdout stderr // windows o linux
+
+stdout // Standard Output Salida normal de la pantalla
+
+C:\controles\7z.exe a prueba.7z C:\controles\*.log
+
+
+
+--el Standard Output lo direcciono a un archivo.
+
+C:\controles\7z.exe a prueba.7z C:\controles\*.log > C:\controles\prueba.txt
+
+
+
+--el Standard Error de un archivo que ya existe 
+
+--Solo en caso de error se llena el prueba1.err (texto)
+
+del C:\controles\prueba.7z > C:\controles\prueba1.txt 2> C:\controles\prueba1.err
+
+
+
+--Truco en Windows nul o Linux /dev/null
+
+--No lo pinta en pantalla ni lo genera a un archivo.
+
+del C:\controles\prueba.7z > nul 2> nul
+
+
+
+del C:\controles\prueba.7z >> C:\controles\prueba1.txt 2>> C:\controles\prueba1.err
