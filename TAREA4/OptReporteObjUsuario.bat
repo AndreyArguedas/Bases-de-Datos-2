@@ -1,7 +1,7 @@
 @ECHO off
 cls
 
-sqlplus /nolog @C:\TAREA4\OptReporteObjUsuario.sql %Owner% %Object%
+sqlplus /nolog @C:\TAREA4\OptReporteObjUsuario.sql
 
 cls
 echo off
@@ -17,7 +17,7 @@ SET VVar1=%Var1:~25,100%
 SET VVar2=%Var2:~25,100%
 SET VVar3=%Var3:~25,100%
 
-start %VVar1% C:\TAREA4\OptReporteObjUsuario.html
+start %VVar2% C:\TAREA4\OptReporteObjUsuario.xml
 
 
 exit

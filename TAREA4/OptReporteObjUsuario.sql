@@ -4,16 +4,16 @@ set linesize 100
 set feedback off
 set verify off
 
-spool C:\TAREA4\OptReporteObjUsuario.html
+spool C:\TAREA4\OptReporteObjUsuario.xml
 
-select '<html><table border="1"><tr><th>OWNER</th><th>COUNT</th></tr>'
+select '<?xml version="1.0" encoding="UTF-8"?>	<listobjetos>'
 from dual;
 
-select '<tr><td>'||OWNER||'</td><td>'||count(*)||'</td></tr>'
+select '<usuario>'||OWNER||'</usuario>	<objetos>'||count(*)||'</objetos>'
 from   dba_objects
 group by OWNER order by 1;
 
-select '</table></html>'
+select '</listobjetos>'
 from dual;
 
 spool off
