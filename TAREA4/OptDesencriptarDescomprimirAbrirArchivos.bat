@@ -17,11 +17,6 @@ SET VVar1=%Var1:~0,29%
 SET PVVar2=%PVar1:~25,100%
 SET PVVar3=%PVar2:~25,100%
 
-echo %VVar1%
-echo %PVVar2%
-echo %PVVar3%
-
-pause
 
 C:\TAREA4\aescrypt.exe -d -p clave123 C:\TAREA4\%VVar1%.7z.aes
 

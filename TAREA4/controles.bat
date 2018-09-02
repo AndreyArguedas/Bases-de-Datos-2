@@ -8,6 +8,7 @@ ECHO 1. Objetos por usuario
 ECHO 2. Reporte ejecutivo de Cantidad de Objetos por usuario
 ECHO 3. Comprimir, encriptar y aplicar NAMEDATE
 ECHO 4. Desencriptar, Descomprimir y volver a abrir los archivos
+ECHO 5. Borrar archivos de salida
 
 ECHO 0. Salir
 
@@ -18,6 +19,7 @@ if '%choice%'=='1' goto OptUsuario
 if '%choice%'=='2' goto OptReporteObjUsuario
 if '%choice%'=='3' goto OptComprimirEncriptarNameDate
 if '%choice%'=='4' goto OptDesencriptarDescomprimirAbrirArchivos
+if '%choice%'=='5' goto OptBorrarArchivosSalida
 if '%choice%'=='0' goto OptSalir
 ECHO "%choice%" Opcion incorrecta.
 pause
@@ -38,6 +40,10 @@ goto start
 
 :OptDesencriptarDescomprimirAbrirArchivos
 start C:\TAREA4\OptDesencriptarDescomprimirAbrirArchivos.bat
+goto start
+
+:OptBorrarArchivosSalida
+start C:\TAREA4\OptBorrarArchivosSalida.bat
 goto start
 
 :OptSalir
