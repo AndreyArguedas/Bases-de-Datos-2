@@ -1,0 +1,5 @@
+touser=usu  
+userid=system/root 
+fromuser=hr 
+file=hr.dmp 
+log=imp-hr.log 
