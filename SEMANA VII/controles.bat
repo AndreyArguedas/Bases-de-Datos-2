@@ -7,6 +7,7 @@ ECHO 1. Respaldo de HR
 ECHO 2. Crear Tabla
 ECHO 3. Importar dinamicamente
 ECHO 5. Mostrar Cantidad de Objetos por Usuario
+ECHO 6. Drop a Usuario
 ECHO 0. Salir
 
 set choice=
@@ -16,6 +17,7 @@ if '%choice%'=='1' goto OptRespaldoHR
 if '%choice%'=='2' goto OptCreaUsuario
 if '%choice%'=='3' goto OptImportarHR
 if '%choice%'=='5' goto OptMostrarCantidadObjetos
+if '%choice%'=='6' goto OptDropUsuario
 
 if '%choice%'=='0' goto OptSalir
 ECHO "%choice%" Opcion incorrecta.
@@ -37,6 +39,10 @@ goto start
 
 :OptMostrarCantidadObjetos
 start C:\controles\OptMostrarCantidadObjetos.bat
+goto start
+
+:OptDropUsuario
+start C:\controles\OptDropUsuario.bat
 goto start
 
 :OptSalir
