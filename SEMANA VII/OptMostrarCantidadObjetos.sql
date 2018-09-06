@@ -11,6 +11,7 @@ from dual;
 
 select '<tr><td>'||OWNER||'</td><td>'||count(*)||'</td></tr>'
 from   dba_objects
+where  OWNER like '%'||UPPER('&1')||'%'
 group by OWNER order by 1;
 
 select '</table></html>'
