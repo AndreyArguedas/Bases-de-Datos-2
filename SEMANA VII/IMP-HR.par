@@ -1,4 +1,4 @@
-touser=usu  
+touser=usur  
 userid=system/root 
 fromuser=hr 
 file=hr.dmp 

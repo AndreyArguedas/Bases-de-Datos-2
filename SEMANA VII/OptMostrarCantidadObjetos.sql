@@ -4,7 +4,7 @@ set linesize 100
 set feedback off
 set verify off
 
-spool C:\Controles\OptMostrarCantidadObjetos.html
+spool ./OptMostrarCantidadObjetos.html
 
 select '<html><table border="1"><tr><th>OWNER</th><th>OBJECT_TYPE</th></tr>'
 from dual;

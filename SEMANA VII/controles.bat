@@ -26,23 +26,23 @@ ECHO.
 goto start
 
 :OptRespaldoHR
-start C:\controles\OptRespaldoHR.bat
+start %~dp0\OptRespaldoHR.bat
 goto start
 
 :OptCreaUsuario
-start C:\controles\OptCreaUsuario.bat
+start %~dp0\OptCreaUsuario.bat
 goto start
 
 :OptImportarHR
-start C:\controles\OptImportarHR.bat
+start %~dp0\OptImportarHR.bat
 goto start
 
 :OptMostrarCantidadObjetos
-start C:\controles\OptMostrarCantidadObjetos.bat
+start %~dp0\OptMostrarCantidadObjetos.bat
 goto start
 
 :OptDropUsuario
-start C:\controles\OptDropUsuario.bat
+start %~dp0\OptDropUsuario.bat
 goto start
 
 :OptSalir
