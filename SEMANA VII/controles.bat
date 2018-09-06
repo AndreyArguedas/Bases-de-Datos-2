@@ -4,7 +4,7 @@ cls
 cls
 ECHO. --Controles en BD---
 ECHO 1. Respaldo de HR
-ECHO 2. Crear Tabla
+ECHO 2. Crear Usuario
 ECHO 3. Importar dinamicamente
 ECHO 5. Mostrar Cantidad de Objetos por Usuario
 ECHO 6. Drop a Usuario
