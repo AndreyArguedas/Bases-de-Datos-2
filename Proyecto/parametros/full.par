@@ -1,0 +1,5 @@
+userid=system/root 
+full=y 
+file=full.dmp 
+log=./logs/full.log 
+statistics=none 
