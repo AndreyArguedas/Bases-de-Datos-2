@@ -25,10 +25,11 @@ goto start
 :OptRespaldoUsuario
 start %~dp0\OptRespaldoUsuario.bat
 goto start
+exit
 
 :OptRespaldoCompleto
 start %~dp0\OptRespaldoCompleto.bat
-goto start
+exit
 
 :OptSalir
 start %~dp0\controles.bat
