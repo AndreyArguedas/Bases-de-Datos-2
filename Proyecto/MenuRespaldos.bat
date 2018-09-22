@@ -6,9 +6,9 @@ ECHO. --Proyecto #1---
 ECHO. --Andrey Arguedas Espinoza---
 ECHO. --MENU RESPALDOS---
 ECHO 1. Respaldo Usuario Oracle
-ECHO 1. Respaldo Completo
+ECHO 2. Respaldo Completo
 
-ECHO 0. Salir
+ECHO 3. Salir
 
 set choice=
 set /p choice=Indique la tarea correspondiente:
@@ -29,6 +29,7 @@ exit
 
 :OptRespaldoCompleto
 start %~dp0\OptRespaldoCompleto.bat
+goto start
 exit
 
 :OptSalir

@@ -1,0 +1,15 @@
+old   1: drop user &1 cascade
+new   1: drop user tt cascade
+
+User dropped.
+
+old   1: create user &1 identified by &1
+new   1: create user tt identified by tt
+
+User created.
+
+old   1: grant dba to &1
+new   1: grant dba to tt
+
+Grant succeeded.
+
