@@ -1,11 +1,11 @@
 @ECHO off
 cls
 
-REM set User=
-REM set /p User=Indique el usuario a crear:
+set User=
+set /p User=Indique el usuario a crear:
 
-REM REM Crear el usuario al que se le importara el respaldo
-REM sqlplus /nolog  @.\Scripts\BorrarCrear.sql %User%
+REM Crear el usuario al que se le importara el respaldo
+sqlplus /nolog  @.\Scripts\BorrarCrear.sql %User%
 
 set Respaldo=
 set /p Respaldo=Indique el respaldo a importar:
@@ -25,7 +25,19 @@ REM Desencripta
 aescrypt.exe -d -p clave123 -o ./datos/%Respaldo%.7z ./respaldos/%VVar1%
 
 REM Descomprime en la carpeta actual
-7z.exe x ./Datos/hr.7z 1> 2.log 2> 2.err
+7z.exe x ./datos/%Respaldo%.7z
+
+move %Respaldo%.dmp ./datos/
+
+REM  Se crea el .par para poder importar
+echo userid=system/root > ./parametros/importar.par
+echo file=./datos/%Respaldo%.dmp >> ./parametros/importar.par
+echo log=./logs/importar.log >> ./parametros/importar.par
+echo fromuser=%Respaldo% >> ./parametros/importar.par
+echo touser=%User% >> ./parametros/importar.par
+
+REM Importa el respaldo al usuario deseado
+imp parfile=./parametros/importar.par
 
 pause
 

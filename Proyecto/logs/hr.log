@@ -14,13 +14,6 @@ About to export HR's objects ...
 . exporting sequence numbers
 . exporting cluster definitions
 . about to export HR's tables via Conventional Path ...
-. . exporting table                      COUNTRIES         25 rows exported
-. . exporting table                    DEPARTMENTS         27 rows exported
-. . exporting table                      EMPLOYEES        107 rows exported
-. . exporting table                    JOB_HISTORY         10 rows exported
-. . exporting table                           JOBS         19 rows exported
-. . exporting table                      LOCATIONS         23 rows exported
-. . exporting table                        REGIONS          4 rows exported
 . exporting synonyms
 . exporting views
 . exporting stored procedures
