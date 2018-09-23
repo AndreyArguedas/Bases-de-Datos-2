@@ -25,7 +25,7 @@ REM Desencripta
 aescrypt.exe -d -p clave123 -o ./datos/%Respaldo%.7z ./respaldos/%VVar1% 1> ./logs/desencripta.log 2> ./logs/desencripta.err
 
 REM Descomprime en la carpeta actual
-7z.exe x ./datos/%Respaldo%.7z 1> ./logs/descomprime.log 2> ./logs/descomprime.err
+7z.exe e ./datos/%Respaldo%.7z 1> ./logs/descomprime.log 2> ./logs/descomprime.err
 
 move %Respaldo%.dmp ./datos/
 

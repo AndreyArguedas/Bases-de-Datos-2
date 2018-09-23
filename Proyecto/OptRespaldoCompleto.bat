@@ -12,7 +12,7 @@ REM se realiza el export
 exp parfile=./parametros/full.par
 
 REM Se comprime el archivo en un 7z
-7z.exe a completo.7z full.dmp 1> ./logs/comprime.log 2> ./logs/comprime.err
+7z.exe a completo.7z completo.dmp 1> ./logs/comprime.log 2> ./logs/comprime.err
 
 REM Se encripta el 7z
 aescrypt.exe -e -p clave123 completo.7z 1> ./logs/encripta.log 2> ./logs/encripta.err
