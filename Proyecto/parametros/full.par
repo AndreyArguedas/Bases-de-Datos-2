@@ -1,5 +1,0 @@
-userid=system/root 
-full=y 
-file=completo.dmp 
-log=./logs/full.log 
-statistics=none 

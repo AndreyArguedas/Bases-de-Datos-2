@@ -1,5 +1,0 @@
-userid=system/root 
-file=./datos/hr.dmp 
-log=./logs/importar.log 
-fromuser=hr 
-touser=tt 
