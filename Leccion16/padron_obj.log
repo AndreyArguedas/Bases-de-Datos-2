@@ -1,0 +1,25 @@
+Connected.
+drop user mineria cascade
+          *
+ERROR at line 1:
+ORA-01918: user 'MINERIA' does not exist 
+
+
+
+Tablespace dropped.
+
+
+Tablespace dropped.
+
+
+Tablespace created.
+
+
+Tablespace created.
+
+
+User created.
+
+
+Grant succeeded.
+

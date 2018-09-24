@@ -1,0 +1,4 @@
+set autotrace offss
+SELECT SYSTIMESTAMP T_INICIO FROM DUAL;
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices; 
+SELECT SYSTIMESTAMP T_FINAL FROM DUAL;

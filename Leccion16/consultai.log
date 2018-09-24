@@ -1,0 +1,51 @@
+SQL> select count(*) where nombre = 'Ana Lorena';
+select count(*) where nombre = 'Ana Lorena'
+                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select count(*) cant from padron where nombre = 'Ana Lorena';
+
+      CANT                                                                      
+----------                                                                      
+         0                                                                      
+
+
+Execution Plan
+----------------------------------------------------------                      
+Plan hash value: 3180652218                                                     
+                                                                                
+-----------------------------------------------------------------------------   
+| Id  | Operation          | Name   | Rows  | Bytes | Cost (%CPU)| Time     |   
+-----------------------------------------------------------------------------   
+|   0 | SELECT STATEMENT   |        |     1 |    17 |  6108   (1)| 00:01:14 |   
+|   1 |  SORT AGGREGATE    |        |     1 |    17 |            |          |   
+|*  2 |   TABLE ACCESS FULL| PADRON |   247 |  4199 |  6108   (1)| 00:01:14 |   
+-----------------------------------------------------------------------------   
+                                                                                
+Predicate Information (identified by operation id):                             
+---------------------------------------------------                             
+                                                                                
+   2 - filter("NOMBRE"='Ana Lorena')                                            
+                                                                                
+Note                                                                            
+-----                                                                           
+   - dynamic sampling used for this statement (level=2)                         
+
+
+Statistics
+----------------------------------------------------------                      
+          5  recursive calls                                                    
+          0  db block gets                                                      
+      22510  consistent gets                                                    
+          0  physical reads                                                     
+          0  redo size                                                          
+        521  bytes sent via SQL*Net to client                                   
+        524  bytes received via SQL*Net from client                             
+          2  SQL*Net roundtrips to/from client                                  
+          0  sorts (memory)                                                     
+          0  sorts (disk)                                                       
+          1  rows processed                                                     
+
+SQL> spool off

@@ -1,0 +1,125 @@
+SQL> select nombre nom, count(*) cant from padron  where nombre like '%AB' group by nombre union all select apellido1, count(*) cant  from padron where apellido1 like 'AB%'  group by apellido1 order by nom;
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+ABAD                                   32                                       
+ABADIA                                102                                       
+ABALOS                                  2                                       
+ABARCA                               9148                                       
+ABAUNZA                                25                                       
+ABBA                                    1                                       
+ABBAD                                   1                                       
+ABBAS                                   1                                       
+ABBASI                                  1                                       
+ABBOLT                                  1                                       
+ABBOTT                                 17                                       
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+ABBOUDI                                 1                                       
+ABDALA                                  3                                       
+ABDALAB                                 1                                       
+ABDALAH                                 9                                       
+ABDALLA                                 9                                       
+ABDALLAH                               20                                       
+ABDEL RAHMAN                            1                                       
+ABDELNOUR                              26                                       
+ABDO                                    1                                       
+ABDULLAH                                1                                       
+ABDUS                                   1                                       
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+ABDYKERIMOV                             1                                       
+ABEA                                   28                                       
+ABEAS                                   1                                       
+ABED                                    4                                       
+ABELA                                   2                                       
+ABELEDO                                 1                                       
+ABELLA                                 10                                       
+ABELLAN                               150                                       
+ABELLO                                  2                                       
+ABENDAÑO                                1                                       
+ABIEL AMINADAB                          1                                       
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+ABINADAB                                1                                       
+ABLAY                                   2                                       
+ABOADI                                  1                                       
+ABOLBAGHAEI                             1                                       
+ABOU ASSI                               2                                       
+ABOU DEHEN                              4                                       
+ABOU DEHN                               1                                       
+ABOU LTAIF                              1                                       
+ABOUGANEM                               1                                       
+ABOUOMAR                                1                                       
+ABRAHAM                                46                                       
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+ABRAHAMS                              134                                       
+ABRAHAN                                 3                                       
+ABRAHANS                                3                                       
+ABRAHMS                                 3                                       
+ABRAMOWITZ                              3                                       
+ABRAMS                                 16                                       
+ABRANS                                  1                                       
+ABREAM                                  1                                       
+ABREGO                                 63                                       
+ABREU                                  31                                       
+ABREW                                   2                                       
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+ABRIGO                                 17                                       
+ABRIL                                   8                                       
+ABU AWAD                                1                                       
+ABU AWAD HAMD                           1                                       
+ABU DEKAR                               1                                       
+ABU HASSAN                              1                                       
+ABUD                                    5                                       
+ABUHADBA                                1                                       
+ABULTO                                  1                                       
+ABURTO                                254                                       
+ABURTOS                                 3                                       
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+ALEXANDER JOAB                          1                                       
+AMINADAB                                1                                       
+AVY NADAB                               1                                       
+CHARLOTTE RAHAB                         1                                       
+ELIAB                                   1                                       
+FERMIN JOHAB                            1                                       
+GADIEL ELIAB                            1                                       
+GERSON ACAB                             1                                       
+GERSON JOAB                             1                                       
+GLORIA AMARAB                           1                                       
+JAMES YAROSLAB                          1                                       
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+JEIMY DAB                               1                                       
+JOAB                                    3                                       
+JOHAB                                   1                                       
+KEVIN JOAB                              1                                       
+LEDY MERAB                              1                                       
+LEIDY SAJINAB                           1                                       
+LIDIA MERAB                             1                                       
+MERAB                                   1                                       
+MOAB                                    1                                       
+NAVVAB                                  1                                       
+RANDY JOAB                              1                                       
+
+NOM                                  CANT                                       
+------------------------------ ----------                                       
+SAUL AMINADAB                           1                                       
+TALAB                                   1                                       
+WARSHAB                                 1                                       
+ZABDI ELIAB                             1                                       
+ZIMRI JOAB                              1                                       
+
+93 rows selected.
+
+SQL> spool off

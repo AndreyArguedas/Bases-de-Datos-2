@@ -1,0 +1,11 @@
+userid=system/root
+file=padron.dmp
+log=padron.log
+fromuser=mineria
+touser=mineria
+tables=padron, distritos
+rows=y
+grants=n
+ignore=y
+constraints=n
+indexes=n
