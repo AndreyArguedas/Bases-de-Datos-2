@@ -1,0 +1,20 @@
+
+select rowid, cedula, nombre
+from padron
+where cedula = 108110911;
+
+-------------- AAAE64AAFAAAA8QABq -------------
+
+
+select rowid, cedula, nombre
+from padron
+where rowid = 'AAAE64AAFAAAA8QABq';
+
+--Activar autotrace
+
+set autotrace on
+
+Practica de optimizacion
+Informe de mejora
+
+select d.provincia, count(p.cedula) from padron p, distritos d where d.codigo = p.codelect group by d.provincia order by d.provincia;
