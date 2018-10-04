@@ -1,0 +1,142 @@
+SQL> set autotrace on
+SQL> select apellido1, count(*) cant  from padron where apellido1 like 'AB%'  group by apellido1 order by apellido1;
+
+APELLIDO1                       CANT                                            
+------------------------- ----------                                            
+ABAD                              32                                            
+ABADIA                           102                                            
+ABALOS                             2                                            
+ABARCA                          9148                                            
+ABAUNZA                           25                                            
+ABBA                               1                                            
+ABBAD                              1                                            
+ABBAS                              1                                            
+ABBASI                             1                                            
+ABBOLT                             1                                            
+ABBOTT                            17                                            
+
+APELLIDO1                       CANT                                            
+------------------------- ----------                                            
+ABBOUDI                            1                                            
+ABDALA                             3                                            
+ABDALAH                            9                                            
+ABDALLA                            9                                            
+ABDALLAH                          20                                            
+ABDEL RAHMAN                       1                                            
+ABDELNOUR                         26                                            
+ABDO                               1                                            
+ABDULLAH                           1                                            
+ABDUS                              1                                            
+ABDYKERIMOV                        1                                            
+
+APELLIDO1                       CANT                                            
+------------------------- ----------                                            
+ABEA                              28                                            
+ABEAS                              1                                            
+ABED                               4                                            
+ABELA                              2                                            
+ABELEDO                            1                                            
+ABELLA                            10                                            
+ABELLAN                          150                                            
+ABELLO                             2                                            
+ABENDAÑO                           1                                            
+ABLAY                              2                                            
+ABOADI                             1                                            
+
+APELLIDO1                       CANT                                            
+------------------------- ----------                                            
+ABOLBAGHAEI                        1                                            
+ABOU ASSI                          2                                            
+ABOU DEHEN                         4                                            
+ABOU DEHN                          1                                            
+ABOU LTAIF                         1                                            
+ABOUGANEM                          1                                            
+ABOUOMAR                           1                                            
+ABRAHAM                           46                                            
+ABRAHAMS                         134                                            
+ABRAHAN                            3                                            
+ABRAHANS                           3                                            
+
+APELLIDO1                       CANT                                            
+------------------------- ----------                                            
+ABRAHMS                            3                                            
+ABRAMOWITZ                         3                                            
+ABRAMS                            16                                            
+ABRANS                             1                                            
+ABREAM                             1                                            
+ABREGO                            63                                            
+ABREU                             31                                            
+ABREW                              2                                            
+ABRIGO                            17                                            
+ABRIL                              8                                            
+ABU AWAD                           1                                            
+
+APELLIDO1                       CANT                                            
+------------------------- ----------                                            
+ABU AWAD HAMD                      1                                            
+ABU DEKAR                          1                                            
+ABU HASSAN                         1                                            
+ABUD                               5                                            
+ABUHADBA                           1                                            
+ABULTO                             1                                            
+ABURTO                           254                                            
+ABURTOS                            3                                            
+
+63 rows selected.
+
+
+Execution Plan
+----------------------------------------------------------                      
+Plan hash value: 2823672332                                                     
+                                                                                
+--------------------------------------------------------------------------------
+---------                                                                       
+                                                                                
+| Id  | Operation             | Name            | Rows  | Bytes | Cost (%CPU)| T
+ime     |                                                                       
+                                                                                
+--------------------------------------------------------------------------------
+---------                                                                       
+                                                                                
+|   0 | SELECT STATEMENT      |                 | 11041 |   150K|    72   (2)| 0
+0:00:01 |                                                                       
+                                                                                
+|   1 |  SORT ORDER BY        |                 | 11041 |   150K|    72   (2)| 0
+0:00:01 |                                                                       
+                                                                                
+|   2 |   SORT GROUP BY NOSORT|                 | 11041 |   150K|    72   (2)| 0
+0:00:01 |                                                                       
+                                                                                
+|*  3 |    INDEX RANGE SCAN   | PADRON_APE1_IDX | 11041 |   150K|    71   (0)| 0
+0:00:01 |                                                                       
+                                                                                
+--------------------------------------------------------------------------------
+---------                                                                       
+                                                                                
+                                                                                
+Predicate Information (identified by operation id):                             
+---------------------------------------------------                             
+                                                                                
+   3 - access("APELLIDO1" LIKE 'AB%')                                           
+       filter("APELLIDO1" LIKE 'AB%')                                           
+                                                                                
+Note                                                                            
+-----                                                                           
+   - dynamic sampling used for this statement (level=2)                         
+
+
+Statistics
+----------------------------------------------------------                      
+          0  recursive calls                                                    
+          0  db block gets                                                      
+         28  consistent gets                                                    
+          0  physical reads                                                     
+          0  redo size                                                          
+       2313  bytes sent via SQL*Net to client                                   
+        568  bytes received via SQL*Net from client                             
+          6  SQL*Net roundtrips to/from client                                  
+          1  sorts (memory)                                                     
+          0  sorts (disk)                                                       
+         63  rows processed                                                     
+
+SQL> spool off

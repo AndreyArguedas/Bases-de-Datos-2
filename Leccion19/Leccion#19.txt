@@ -1,0 +1,163 @@
+Leccion #19
+-------------
+Semana #11
+
+01 Oct 2018
+-----------
+
+--modificar TAMAÑO DE TABLESPACE
+SIZE 100M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+1M
+
+
+--selects en vistas (practica para la casa)
+--select en funciones o procedimientos (en clase)
+--USO DE: union versus or (en clase)
+
+
+--nombres unicos
+select nombre, count(nombre)
+from padron
+group by nombre
+having count(nombre) = 1;
+IRENE LUZ
+
+--apellidos unicos
+select apellido1, count(apellido1)
+from padron
+group by apellido1
+having count(apellido1) = 1;
+ MADERA
+
+======================================================================================
+
+--DOS SELECTS, Mismo Resultado , pero mismo costo?  
+
+select nombre, apellido1
+from padron
+where nombre = 'IRENE LUZ'
+union
+select nombre, apellido1
+from padron
+where apellido1 = 'MADERA';
+
+
+
+select nombre, apellido1
+from padron
+where apellido1 = 'MADERA' or nombre = 'IRENE LUZ';
+
+3325 / 3323 (con indices)
+
+======================================================================================
+--para ejercicio
+create or replace procedure prc_nombre is
+
+cursor CNombresUnicos is
+select nombre, count(nombre) cand
+from padron
+where nombre like 'A%'
+group by nombre
+having count(nombre) = 1;
+VApellido1 varchar2(100);
+begin
+  --solo procesa el nombre para ver cuanto tarda
+  for x in CNombresUnicos loop
+     select apellido1
+	 into   VApellido1
+	 from  padron
+	 where nombre = x.nombre;
+  end loop;
+end prc_nombre;
+/
+
+--4 minutos y no habia terminado.. SIN INDICE
+SELECT SYSTIMESTAMP T_INICIO FROM DUAL;
+execute prc_nombre;
+SELECT SYSTIMESTAMP T_FINAL FROM DUAL;
+
+
+======================================================================================
+
+--OJO VER CRECIMIENTO FISICO DEL ARCHIVO.  72
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices;
+CREATE INDEX padron_ape1_idx ON padron(apellido1) TABLESPACE padron_indices;
+
+drop index padron_nom_idx;
+drop index padron_ape1_idx;
+
+--25 segundos con IDX
+SELECT SYSTIMESTAMP T_INICIO FROM DUAL;
+execute prc_nombre;
+SELECT SYSTIMESTAMP T_FINAL FROM DUAL;
+
+--me vuelo solo los indices!
+
+
+--25 segundos con IDX
+SELECT SYSTIMESTAMP T_INICIO FROM DUAL;
+execute prc_nombre;
+SELECT SYSTIMESTAMP T_FINAL FROM DUAL;
+======================================================================================
+
+
+drop TABLESPACE padron_indices including contents and datafiles;
+
+--sin indice....  11 minutos y no termina!
+
+alter table padron add cedula2 varchar2(9);
+alter table padron modify cedula2 varchar2(9);
+
+
+--Creamos PK
+alter table padron add constraint padron_pk primary key (cedula) 
+using index tablespace padron_indices;
+
+
+
+============================================================================================
+APARTE
+
+alter table padron drop constraint padron_pk;
+
+
+--Creamos PK en padron_indices3 56MB QUEDA DATAFILE
+alter table padron add constraint padron_pk primary key (cedula) 
+using index tablespace padron_indices3;
+
+--borrar y crear nuevamente. 
+alter table padron drop constraint padron_pk;
+drop TABLESPACE padron_indices3 including contents and datafiles;
+
+
+--ahora como indice  59MB QUEDA DATAFILE
+CREATE INDEX padron_ced_idx ON padron(cedula) TABLESPACE padron_indices3;
+
+
+--
+CREATE TABLESPACE padron_indices3
+datafile 'C:\oraclexe\app\oracle\oradata\XE\padron_indices3.DBF'  
+SIZE 1M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+
+--
+CREATE TABLESPACE padron_indices4
+datafile 'C:\oraclexe\app\oracle\oradata\XE\padron_indices4.DBF'  
+SIZE 1M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+
+
+--1119983
+update padron set cedula2 = to_char(cedula)
+where cedula between 100000001 and 200000000;
+
+--1743674
+update padron set cedula2 = to_char(cedula)
+where cedula between 200000001 and 999999999;
+
+TOTAL: 2863657
+
+
+--ahora IDX de CEDULA2 pero en : padron_indices4  son 75MB!!!! y eso que es de 9 posiciones!
+CREATE INDEX padron_ced2_idx ON padron(cedula2) TABLESPACE padron_indices4;
+
+======================================================================================
+

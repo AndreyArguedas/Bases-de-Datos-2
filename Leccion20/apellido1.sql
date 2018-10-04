@@ -1,0 +1,4 @@
+set autotrace off
+SELECT SYSTIMESTAMP T_INICIO FROM DUAL;
+CREATE INDEX padron_ape1_idx ON padron(apellido1) TABLESPACE padron_indices; 
+SELECT SYSTIMESTAMP T_FINAL FROM DUAL;

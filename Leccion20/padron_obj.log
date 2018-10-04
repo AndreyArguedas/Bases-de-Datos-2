@@ -1,0 +1,31 @@
+Connected.
+drop user mineria cascade
+          *
+ERROR at line 1:
+ORA-01918: user 'MINERIA' does not exist 
+
+
+drop TABLESPACE padron_datos including contents and datafiles
+*
+ERROR at line 1:
+ORA-00959: tablespace 'PADRON_DATOS' does not exist 
+
+
+drop TABLESPACE padron_indices including contents and datafiles
+*
+ERROR at line 1:
+ORA-00959: tablespace 'PADRON_INDICES' does not exist 
+
+
+
+Tablespace created.
+
+
+Tablespace created.
+
+
+User created.
+
+
+Grant succeeded.
+

@@ -1,0 +1,276 @@
+Complemento Leccion #19 3pm
+===========================
+Practica #3
+============
+Para Lunes 8 de Octubre 12 Medio día se entrega.
+en PDF un solo archivo en Aula Virtual.
+Formato:
+Prac3_Nombre_Apellido.PDF
+-----------------------------------------------
+Formato de Documento de INGENIERIA!
+
+Con portada formal.
+Con Introducción (al menos media página)
+Con El detalle de todas las prácticas de la leccion
+#17, #18 y #19, con Screenshots y explicaciones
+Bien ordenada la práctica.
+Y comentarios o concluiones de cada ejercicio
+
+inclusive, explicar el .BAT PADRON y la carga de los
+datos.
+
+Y de forma individual.
+
+y el lunes 8 aplicamos Kahoot de conceptos 
+de optimizacion.
+Con conclusiones FINALES BIEN REDACTADAS!!.
+
+Usar EXPLAIN PLAN!
+
+Asi debe quedar:
+=================
+Portada
+Introducción
+1. Padron.bat
+2. Lección #17
+3. Lección #18 (se ejecuta Padron.bat pero no se explica)
+4. Lección #19 (se ejecuta Padron.bat pero no se explica)
+5. Van a crear 2 SELECTS bien complejos
+    (se ejecuta Padron.bat pero no se explica)
+   TABLA PADRON y DISTRITOS
+   y lo optimizan.
+   BUSCAR LA FORMA de hacer el SELECT pesado
+   y luego optimizarlo 
+   Y esos mismos DOS SELECTS convertirlos a Vistas
+   y demostrar si mantienen el mismo costo.
+Conclusiones Finales
+
+========================================================
+A continuación los pasos de la lacción #19
+========================================================
+1) Modificar padron_indices
+
+--modificar TAMAÑO DE TABLESPACE
+SIZE 100M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+1M
+========================================================
+2) Para la práctica #3....:
+create view vista01 as
+select .....
+
+
+--EXPLAIN PLAN de esto:
+select *
+from vista01;
+
+Practicar EXPLAIN PLAN en lugar del select "puro"
+con una vista.... da los mismos resultados???
+========================================================
+3) pruebas de selects mismos resultados:
+set autotrace on
+
+--12200
+select nombre, apellido1
+from padron
+where nombre = 'IRENE LUZ'
+union
+select nombre, apellido1
+from padron
+where apellido1 = 'MADERA';
+
+--6107 (baja a la mitad)
+select nombre, apellido1
+from padron
+where apellido1 = 'MADERA' or nombre = 'IRENE LUZ';
+
+========================================================
+4) Con Indice en nombre:  76MB
+
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices;
+
+--Si el tamaño del DATAFILE es insuficiente y permite crecimiento
+el archivo va a crecer de acuerdo a la necesidad de espacio
+(este crecimiento causa un OVERHEAD) porque no tengo
+el espacio reservado.  RECOMD:  Tener TBSP con suficiente espacio
+y monitorearlos!!!
+
+
+--de 12200 baja // 6723
+select nombre, apellido1
+from padron
+where nombre = 'IRENE LUZ'
+union
+select nombre, apellido1
+from padron
+where apellido1 = 'MADERA';
+
+--6107 (baja a la mitad) // 6101 Iugla
+select nombre, apellido1
+from padron
+where apellido1 = 'MADERA' or nombre = 'IRENE LUZ';
+
+========================================================
+
+5) Ahora con indice tambien en apellido1
+
+
+--antes 75.6M ahora 136MB
+CREATE INDEX padron_ape1_idx ON padron(apellido1) TABLESPACE padron_indices;
+
+
+--de 12200 baja // 6723 idx nom // baja a 3325 con dos indices.
+--en algunos casos no usó el indice!
+select nombre, apellido1
+from padron
+where nombre = 'IRENE LUZ'
+union
+select nombre, apellido1
+from padron
+where apellido1 = 'MADERA';
+
+--6107 (baja a la mitad) // 6101 igual // baja a 3323 con 2 IDX
+--en algunos casos no usó el indice!
+select nombre, apellido1
+from padron
+where apellido1 = 'MADERA' or nombre = 'IRENE LUZ';
+
+========================================================
+6) costo de 265
+select nombre, count(nombre) cand
+from padron
+where nombre like 'A%'
+group by nombre
+having count(nombre) = 1;
+
+--2 a 3 segundos
+host cls
+set autotrace off
+SELECT SYSTIMESTAMP T_INICIO FROM DUAL;
+execute prc_nombre;
+SELECT SYSTIMESTAMP T_FINAL FROM DUAL;
+
+luego.. dropeamos indice de nombr
+drop index padron_nom_idx;
+
+--y volvemos a ejecutar procedimiento..
+
+Conclusión:
+Si un proceso es depediente de un indice
+porque se ejecuta muchisimas veces, 
+y el índice no existe.... resultado: 
+SE PEGA EL PROCESO!
+========================================================
+
+7) Matar sesiones de base de datos
+--vista del Diccionario de datos
+--con todas las sesiones conectadas
+--a la Base de datos.
+select sid, serial#, username
+from sys.v_$session
+where username = 'MINERIA';
+--SID,SERIAL#
+--entre comilla simple el sid, serial#
+--------------
+SQL> alter system kill session '8,415';
+
+System altered.
+--------------
+en la otra session:
+
+*
+ERROR at line 1:
+ORA-00028: your session has been killed
+ORA-00028: your session has been killed
+ORA-06512: at "MINERIA.PRC_NOMBRE", line 13
+ORA-06512: at line 1
+========================================================
+8) Validar que es más eficiente un IDX de
+campo numerico que un IDX de campo TEXTO aún con los mismos
+valores.
+
+Creamos dos TBSP para indices, inician en 1M
+--137 a 146
+--
+CREATE TABLESPACE padron_indices3
+datafile 'C:\oraclexe\app\oracle\oradata\XE\padron_indices3.DBF'  
+SIZE 1M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+
+--
+CREATE TABLESPACE padron_indices4
+datafile 'C:\oraclexe\app\oracle\oradata\XE\padron_indices4.DBF'  
+SIZE 1M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+
+--determinar cual es el tamaño del PK en padron_indices3
+
+--Creamos PK en padron_indices3 56MB QUEDA DATAFILE
+alter table padron add constraint padron_pk primary key (cedula) 
+using index tablespace padron_indices3;
+
+--vamos a copiar el valor de CEDULA como texto y vamos a 
+--crear un inddice NORMAL!
+alter table padron add cedula2 varchar2(9);
+
+desc padron (ANOTAR!!)
+CEDULA  NUMBER(10)
+CEDULA2 VARCHAR2(9)
+
+update padron set cedula2 = to_char(cedula)
+where cedula between 100000001 and 200000000;
+commit;
+
+SELECT SYSTIMESTAMP T_INICIO FROM DUAL;
+update padron set cedula2 = to_char(cedula)
+where cedula between 200000001 and 999999999;
+SELECT SYSTIMESTAMP T_FINAL FROM DUAL;
+commit;
+
+--queda en 76.6 MB
+CREATE INDEX padron_ced2_idx ON padron(cedula2) TABLESPACE padron_indices4;
+========================================================
+vamos a comparar IDX por IDX porque
+anteriormente comparamps PK por IDX
+
+9)
+alter table padron drop constraint padron_pk;
+
+crear un TABLESPACE #5
+
+--
+CREATE TABLESPACE padron_indices5
+datafile 'C:\oraclexe\app\oracle\oradata\XE\padron_indices5.DBF'  
+SIZE 1M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+--queda en 59MB Contra 56MB del PK. (el PK es not null siempre)
+CREATE INDEX padron_ced_idx ON padron(cedula) TABLESPACE padron_indices5;
+
+--59MB vrs 77MB  23.37% Ahorro de espacio.
+a pesar de que:
+CEDULA  NUMBER(10)
+CEDULA2 VARCHAR2(9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

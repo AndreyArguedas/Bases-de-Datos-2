@@ -1,0 +1,122 @@
+Leccion #20
+============
+
+Semana #11
+
+04 Oct 2018
+-----------
+
+
+1) Repaso clase anterior
+2) Lunes entrega de Practica #3 y Kahoot
+3) Control:  Monitoreo de espacio de TBSP
+ 
+ 3.1)
+ MODIFICAR: crear TBSP de 200MB (AMBOS)
+ ver tamaño fisico.
+--espacio logico libre de 200MB!
+--el espacio fisico es 200MB, contiene ESPACIO RESERVADO DE ALMANCENAMIENTO
+
+ 3.2) colocar pausa
+ sqlplus /nolog @padron.sql
+ pause
+ 
+ y ejecutar padron.bat (dejarlo en PAUSA)
+ 
+ Ejecutar CONSULTA del 3.5)
+ 
+ 3.3) Generar Reporte
+--ocupan tener un objeto creado:
+--puede ser como mineria, SQLPLUS APARTE.
+create table t1(a number) tablespace padron_datos;
+create table t2(a number) tablespace padron_indices;
+ 
+ 3.4) Presionar ENTER, para continuar el IMPORT...
+   volver a ejecutar consulta 3.5)
+   ver resultado?
+   ver tamaño fisico del TABLESPACE
+   
+
+ 3.5) Consulta. (CREAR VISTA COMO SYS)
+ 
+--inicio
+host cls
+create view esp_pad as
+select df.tablespace_name "Tablespace", totalusedspace "MB Usados",
+(df.totalspace - tu.totalusedspace) "MB Libres", df.totalspace "MB Total",
+round(100 * ( (df.totalspace - tu.totalusedspace)/ df.totalspace)) "Porc. Libre"
+from
+(select tablespace_name,
+round(sum(bytes) / 1048576) TotalSpace
+from dba_data_files 
+group by tablespace_name) df,
+(select round(sum(bytes)/(1024*1024)) totalusedspace, tablespace_name
+from dba_segments 
+group by tablespace_name) tu
+where df.tablespace_name = tu.tablespace_name
+and upper(df.tablespace_name) like '%PADRON%'
+order by 1;
+--fin
+
+--permisos y sinonimo (PUNTERO)
+grant select on esp_pad to dba;
+create public synonym esp_pad for sys.esp_pad;
+
+--como mineria
+
+set linesize 100 pagesize 100
+col "Tablespace" for a22
+col "MB Usados" for 99,999,999
+col "MB Libres" for 99,999,999
+col "MB Total" for 99,999,999
+select * from esp_pad;
+
+
+3.6)
+
+ALTER TABLE PADRON RENAME TO PADRON2;
+ALTER TABLE DISTRITOS RENAME TO DISTRITOS2;
+
+
+3.7) volver a ejecutar pero solo el IMPORT!
+
+imp parfile=padron.par
+
+--espacio logico libre de 18MB! (Se extiende en piezas mas grandes)
+--el espacio fisico es 371MB, NO contiene ESPACIO RESERVADO DE ALMANCENAMIENTO
+
+==================================================================================
+
+
+4) Indices.
+
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices;
+
+Revisar reporte de espacio?
+
+--reconstruir indice en mismo tablespace.
+alter index padron_nom_idx rebuild tablespace padron_indices;
+
+Revisar reporte de espacio?
+
+--reconstruir indice en OTRO tablespace.
+alter index padron_nom_idx rebuild tablespace padron_datos;
+
+Revisar reporte de espacio?
+
+
+--reconstruir indice en mismo tablespace ORIGINAL.
+alter index padron_nom_idx rebuild tablespace padron_indices;
+
+Revisar reporte de espacio?
+
+
+==================================================================================
+
+5) Iniciar la Práctica #3!
+
+Consultas?
+
+==================================================================================
+
+

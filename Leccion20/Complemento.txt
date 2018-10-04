@@ -1,0 +1,91 @@
+Complemento 20
+
+en un nuevo cmd conectarse como sys
+
+sqlplus /nolog
+
+conn sys as sysdba
+
+Cuando pide password presionar ENTER
+
+AGARRAR DE LANIA 44 A LAS 58 Y PEGAR EN LA SESION DE SYS -> vISTA SE CREA CON ENTER
+
+***********LUEGO DAR ESTOS PERMISOS
+
+--permisos y sinonimo (PUNTERO)
+grant select on esp_pad to dba;
+create public synonym esp_pad for sys.esp_pad;
+
+*****************
+
+*/////////////*/*/*/*/*/*/*////////*/*/*/*/
+
+aBRIR TERCERA CONSOLA Y CONECTARSE CON sqlplus mineria/mineria
+1- Hacemos select a la vista con esto
+set linesize 100 pagesize 100
+col "Tablespace" for a22
+col "MB Usados" for 99,999,999
+col "MB Libres" for 99,999,999
+col "MB Total" for 99,999,999
+select * from esp_pad;
+
+2- Creamos tablas con
+create table t1(a number) tablespace padron_datos;
+create table t2(a number) tablespace padron_indices;
+
+//Mientras este en la misma sesion puedo usar el select sin volver a dar formato de columnas
+
+3- select * from esp_pad;
+
+**********************************
+
+Le damos enter a la consola donde teniamos en PAUSE para que importe padron
+
+4 - select * from esp_pad; //Ver como cambiaron las cosaas en la consola donde ejecutamos
+
+***********************************************************************************************
+RENOMBRAMOS LAS TABLAS 
+
+ALTER TABLE PADRON RENAME TO PADRON2;
+ALTER TABLE DISTRITOS RENAME TO DISTRITOS2;
+
+vOLVER A IMPORTAR ABRIENDO UNA CONSOLA NUEVA
+
+imp parfile=padron.par
+
+select * from esp_pad; //Ver como cambiaron las cosaas en la consola donde ejecutamos
+***********************************************************
+en la consola donde estamos como mineria hacemos
+
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices;
+
+select * from esp_pad; //Ver como cambiaron las cosaas en la consola donde ejecutamos
+
+
+
+
+--reconstruir indice en mismo tablespace.
+alter index padron_nom_idx rebuild tablespace padron_indices;
+
+--reconstruir indice en OTRO tablespace.
+alter index padron_nom_idx rebuild tablespace padron_datos;
+
+PINTEMOS EL REPORTE
+select * from esp_pad; //Ver como cambiaron las cosaas en la consola donde ejecutamos
+
+
+2) cUANDO UN TABLESPACE CRECE Y POSTERIORMENTE SE LIBERA EL ESPACIO EL TAMANO DEL DATAFILE NO DECRECE
+
+
+***********************************************************************************************
+
+TRUNCATE TABLE PADRON DROP STORAGE; //LIMPIA EL STORAGE 
+
+TRUNCATE TABLE PADRON2; //sOLO LIBERA EL INDEX
+
+drop table padron;
+drop table padron2;
+
+purge recyclebin;
+
+--El tamaño del datafile permanece igual al maximo alcanzado
