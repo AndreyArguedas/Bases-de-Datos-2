@@ -1,0 +1,123 @@
+Control
+========
+1) 4 segundos
+2) 4 segundos
+3) 3 segundos
+4) 3 segundos
+5 y 6) 3 segundos.
+
+luego de reiniciar oracle, muy posiblemente la primera vez dure
+un poco mas
+7) 8 segundos...
+8) 7 segundos..
+9) 8 segundos...
+
+
+luego creamos el indice para NOMBRE
+10) 1 segundo!!!
+11) menos de 1 segundo!!!
+luego reiniciamos Oracle
+12,13,14)  Menos de 1 segundo..
+
+luego colocamos upper(nombre) (EN EL CAMPO)
+15) 9 segundos.
+16) 8 segundos.
+17) 8 segundos..
+
+luego dejamos nombre= upper('juan')
+18) menos de 1 segundo nuevamente.
+19) menos de 1 segundo nuevamente.
+20) menos de 1 segundo nuevamente.
+
+luego, hacemos: where nombre like 'JUAN%';
+21) menos de 1 segundo nuevamente.
+22) menos de 1 segundo nuevamente.
+23) menos de 1 segundo nuevamente.
+
+luego, hacemos: where nombre like '%JUAN%';
+24) 7
+25) 6
+26) 7
+
+============================================================
+#1
+Se mejora el tiempo porque los resultados de las ultimas consultas
+están en CACHE del SGA. (System Global Area de Oracle)
+
+DETENER EL ORACLE.
+LO VOLVEMOS A LEVANTAR
+
+echo REINICIO ORACLE ================================= >> reporte_final.log
+
+echo AGREGAR INDICE NOMBRE ============================ >> reporte_final.log
+
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices;
+
+--3 veces las mismas consultas.. Reporte.bat
+y anotamos!!
+
+
+
+echo CON INDICE NOMBRE REINICIO ORACLE ============================ >> reporte_final.log
+
+
+echo CON INDICE NOMBRE Y CON UPPER ============================ >> reporte_final.log
+
+
+echo CON INDICE NOMBRE Y CON UPPER en VARIABLE ============================ >> reporte_final.log
+
+
+
+
+echo CON INDICE NOMBRE Y LIKE ============================ >> reporte_final.log
+
+echo CON INDICE NOMBRE Y LIKE DOBLE ============================ >> reporte_final.log
+
+
+hacer explain plan
+select count(*) from mineria.padron where nombre like '%JUAN%';
+INDEX FAST FULL SCAN  COSTO 2430
+
+select count(*) from mineria.padron where nombre like 'JUAN%';
+INDEX RANGE SCAN      COSTO 5
+
+
+select count(*) from mineria.padron where nombre = 'JUAN';
+INDEX RANGE SCAN      COSTO 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

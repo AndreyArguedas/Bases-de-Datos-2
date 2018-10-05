@@ -1,0 +1,5 @@
+userid=system/root 
+file=./datos/completo.dmp 
+log=./logs/importar.log 
+fromuser=completo 
+touser=usuariofull 

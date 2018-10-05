@@ -1,0 +1,37 @@
+SQL> SELECT SYSTIMESTAMP T_INICIO FROM DUAL;
+
+T_INICIO                                                                        
+---------------------------------------------------------------------------     
+04/10/18 22:55:43,235000 -06:00                                                 
+
+SQL> select count(*) from mineria.padron where nombre like '%JUAN%';
+
+  COUNT(*)                                                                      
+----------                                                                      
+     55614                                                                      
+
+SQL> select count(*) from mineria.padron where nombre like '%PEDRO%';
+
+  COUNT(*)                                                                      
+----------                                                                      
+      6106                                                                      
+
+SQL> select count(*) from mineria.padron where nombre like '%ANA%';
+
+  COUNT(*)                                                                      
+----------                                                                      
+    162767                                                                      
+
+SQL> select count(*) from mineria.padron where nombre like '%ROBERTO%';
+
+  COUNT(*)                                                                      
+----------                                                                      
+     15939                                                                      
+
+SQL> SELECT SYSTIMESTAMP T_FINAL FROM DUAL;
+
+T_FINAL                                                                         
+---------------------------------------------------------------------------     
+04/10/18 22:55:44,263000 -06:00                                                 
+
+SQL> spool off

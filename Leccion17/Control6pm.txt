@@ -1,0 +1,128 @@
+Control
+========
+#1 Ejecución inicial:
+=====================
+1) 2 segundos
+2) 2 segundos
+3) 2 segundos
+4) 2 segundos
+5 y 6) 2 segundos.
+
+Ejecutar:  services.msc , detener, iniciar
+
+echo Reiniciar Oracle =========================== >> reporte_final.log
+
+#2 Luego de reiniciado Oracle
+=============================
+7) 8 segundos.
+8) 8 segundos.
+9) 9 segundos.
+
+echo Crear Indice a nombre ========================= >> reporte_final.log
+
+sqlplus mineria/mineria
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices;
+en SQL PLUS, dice:
+
+Index created.
+
+#3 Luego de crear indice en nombre
+===================================
+10) menos 1 segundo
+11) menos 1 segundo
+12) menos 1 segundo
+
+#4 Cambiar el Where upper(nombre) --INEFICIENTE!!! en el select.
+==================================================
+
+echo con upper(nombre) ========================= >> reporte_final.log
+
+13) 9 segundos
+14) 8 segundos
+15) 8 segundos
+
+#5 Cambiar el Where nombre = upper('juan')
+===========================================
+
+echo con upper('juan') ========================= >> reporte_final.log
+
+16) menos de 1 segundo
+17) menos de 1 segundo
+18) menos de 1 segundo
+
+#6 Like de 'JUAN%'
+===================
+
+echo like de 'JUAN%' ========================= >> reporte_final.log
+
+19) 1 segundo
+20) 1 segundo
+21) 1 segundo
+
+#7 Like de '%JUAN%'
+====================
+
+echo OJO like de '%JUAN%' ========================= >> reporte_final.log
+
+22) 7 segundos
+23) 7 segundos
+24) 7 segundos
+
+Justificacion
+==============
+
+hacer explain plan
+select count(*) from mineria.padron where nombre like '%JUAN%';
+INDEX FAST FULL SCAN  COSTO 2430
+
+select count(*) from mineria.padron where nombre like 'JUAN%';
+INDEX RANGE SCAN      COSTO 5
+
+select count(*) from mineria.padron where nombre = 'JUAN';
+INDEX RANGE SCAN      COSTO 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

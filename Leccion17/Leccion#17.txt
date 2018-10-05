@@ -1,0 +1,101 @@
+Leccion #17
+-------------
+Semana #10
+
+24 set 2018
+
+-----------------------
+
+1) Repaso lección anterior inicio optimizacion.
+explain plan, serie de pasos para resolver la consulta:
++importantes COSTO CPU, TIEMPO.
+set autotrace on
+
+2) Ejecutar padron.bat para volver a borrar y crear todo!
+
+3) Prueba sin indice
+
+5seg
+2seg
+3seg
+
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices;
+
+
+echo creamos indice a UPPER ==================================================== >> reporte_final.log
+
+menos de 1 segundo!!
+
+que pasa si transformamos:
+
+select count(*) from mineria.padron where nombre = 'JUAN';
+
+echo cambiamos a UPPER ==================================================== >> reporte_final.log
+PAsa a 10 segundos!! era mejor sin indice!!
+
+echo IDX de  a UPPER ==================================================== >> reporte_final.log
+--ESTO OCUPA ESPACIO FISICO, y PROCESAMIENTO ADICIONAL EN CADA INSERT o UPDATE de los campos de la TABLA
+CREATE INDEX padron_nom_idx2 ON padron(upper(nombre)) TABLESPACE padron_indices;
+--nuevamente ejecutamos script y dura menos de 1 segundo.. pero a qué precio???
+
+
+
+
+
+--Práctica en CLASE
+=====================
+
+--La fecha es Fecha de vencimiento de la cedula
+select max(FECHA), min(FECHA) from padron;
+
+-anotar: 31/07/20 06/12/09 rango de fechas de vencimiento de cedula.
+
+--recordar que para convertir de TEXTO a fecha se debe usar ejemplo:
+to_date('30-12-2018','dd-mm-yyyy')
+
+--hacer un script que cuente cuantas cedulas se vencen por año 2009, hasta 2010
+reporte_fecha.sql .bat+.log, + reporte_fecha_final.log
+1) Sin indice en fecha, (ejecutar 2 veces)
+2) Con indice en fecha, (ejecutar 2 veces)
+3) crear indice to_char(fecha,'yyyy')
+
+--874 registros PARA 2009 //  --80245 registros PARA 2010
+select count(*) 
+from padron where fecha >= to_date('01-01-2009','dd-mm-yyyy')
+and fecha <= to_date('31-12-2009','dd-mm-yyyy');
+
+--874 PARA 2009 //  --80245 PARA 2010
+select count(*) 
+from padron where to_char(fecha,'yyyy') = '2009';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

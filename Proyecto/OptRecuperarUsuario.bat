@@ -68,6 +68,8 @@ echo ______________________________________________________ >> ./logs/imports.lo
 echo Final ================================================ >> ./logs/imports.log
 
 del recuperado.ini
+del .\datos\%Respaldo%.7z
+del .\datos\%Respaldo%.dmp
 del .\logs\BorrarCrear.log
 del .\logs\desencripta.err
 del .\logs\desencripta.log

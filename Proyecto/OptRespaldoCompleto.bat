@@ -17,8 +17,8 @@ REM Se comprime el archivo en un 7z
 REM Se encripta el 7z
 aescrypt.exe -e -p clave123 completo.7z 1> ./logs/encripta.log 2> ./logs/encripta.err
 
-REM Se realiza el movimiento del dmp a la carpeta datos
-move completo.dmp .\datos\
+REM Se elimina el dmp ya que esta guardado en el 7z
+del completo.dmp
 
 REM Se pone el namedate
 namedate.exe /Y /ZZ:"F(Y-m-d)-(H-M-S).X" completo.7z.aes 1> ./logs/namedate.log 2> ./logs/namedate.err

@@ -1,0 +1,141 @@
+Control8pm.txt
+===============
+#1 Ejecución inicial:
+=====================
+1) 2 segundos
+2) 1 segundos
+3) 1 segundos
+
+#2 Reiniciar el Oracle
+======================
+services.msc, DETENER, INICIAR  (OracleXE)
+
+Se mejora el tiempo porque los resultados de las ultimas consultas
+están en CACHE del SGA. (System Global Area de Oracle)
+
+echo REINICIO ORACLE ================================ >> reporte_final.log
+
+4) 11 segundos
+5) 8 segundos
+6) 8 segundos.
+
+#3 Crear Indice a nombre
+========================
+
+echo Crear Indice a nombre ========================= >> reporte_final.log
+
+CREATE INDEX padron_nom_idx ON padron(nombre) TABLESPACE padron_indices;
+
+7) menos 1 segundo
+8) menos 1 segundo
+9) menos 1 segundo
+
+#4 Cambiar el Where upper(nombre) --INEFICIENTE!!! en el select.
+==================================================
+
+echo Con upper(nombre) INEFICIENTE!!! ========================= >> reporte_final.log
+10) 9 segundos.
+11) 8 segundos.
+12) 8 segundos.
+
+#5 Cambiar el Where nombre = upper('juan') -EFICIENTE-
+===========================================
+
+echo Con nombre= upper('juan') ========================= >> reporte_final.log
+
+13) menos de 1 segundo.
+14) menos de 1 segundo.
+15) menos de 1 segundo.
+
+#6 Like de 'JUAN%'
+===================
+
+echo like de 'JUAN%' ========================= >> reporte_final.log
+
+16) menos de 1 segundo.
+17) menos de 1 segundo.
+18) menos de 1 segundo.
+
+
+#7 Like de '%JUAN%'
+====================
+
+echo OJO like de '%JUAN%' ========================= >> reporte_final.log
+
+19) 7 segundos
+20) 7 segundos
+21) 7 segundos
+
+hacer explain plan
+==================
+EXPLICACION:
+=============
+
+select count(*) from mineria.padron where nombre like '%JUAN%';
+INDEX FAST FULL SCAN  COSTO 2430
+
+select count(*) from mineria.padron where nombre like 'JUAN%';
+INDEX RANGE SCAN      COSTO 5
+
+select count(*) from mineria.padron where nombre = 'JUAN';
+INDEX RANGE SCAN      COSTO 5
+
+
+
+Practica Final
+1) 1 seg + 4 segs
+
+echo Con Indice de Fecha ========================= >> reporte_fecha_final.log
+
+--crear sqlplus co mineria
+CREATE INDEX padron_fec_idx ON padron(fecha) TABLESPACE padron_indices;
+
+2) 0seg + 3 segs.
+3) 0seg + 3 segs.
+
+
+
+CREATE INDEX padron_fec2_idx ON padron(to_char(fecha,'yyyy')) TABLESPACE padron_indices;
+
+
+echo Con Indice de to_char(fecha,'yyyy') ========================= >> reporte_fecha_final.log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
